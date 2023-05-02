@@ -21,8 +21,54 @@ namespace AdBoardsWebAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("GetAds")]
+        public ActionResult GetAds()
+        {
+            var ads = _context.Ads.ToList();
+            if (ads.Any())
+            {
+                return Ok(ads);
+            }
+            else
+            {
+                return BadRequest();
+            }    
+        }
+
+        [HttpGet("GetMyAds")]
+        public ActionResult GetMyAds(int id)
+        {
+            
+            var ads = _context.Ads.Where(x => x.PersonId == id).ToList();
+            if (ads.Any())
+            {
+                return Ok(ads);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("GetMyAds")]
+        public ActionResult GetFavoritesAds(int id)
+        {
+            Person person = _context.People.First(x => x.Id == id);
+            List<Favorite> ads = person.Favorites.ToList();
+
+            if (ads.Any())
+            {
+                return Ok(ads);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+
         [HttpPost("Addition")]
-        public async Task<ActionResult<Person>> AddAd(AdDTO ad)
+        public async Task<ActionResult<Ad>> AddAd(AdDTO ad)
         {
             Ad a = new Ad();
             a.Price = ad.Price;
@@ -43,7 +89,7 @@ namespace AdBoardsWebAPI.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<ActionResult<Person>> UpdateAd(AdDTO ad)
+        public async Task<ActionResult<Ad>> UpdateAd(AdDTO ad)
         {
             Ad a = await _context.Ads.FirstAsync(x => x.Id == ad.Id);
 
@@ -61,7 +107,7 @@ namespace AdBoardsWebAPI.Controllers
         }
 
         [HttpDelete("Update")]
-        public async Task<ActionResult<Person>> DeleteAd(int id)
+        public async Task<ActionResult<Ad>> DeleteAd(int id)
         {
             Ad a = await _context.Ads.FirstAsync(x => x.Id == id);
 
