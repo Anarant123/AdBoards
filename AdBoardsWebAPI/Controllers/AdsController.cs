@@ -50,7 +50,7 @@ namespace AdBoardsWebAPI.Controllers
             }
         }
 
-        [HttpGet("GetMyAds")]
+        [HttpGet("GetFavoritesAds")]
         public ActionResult GetFavoritesAds(int id)
         {
             Person person = _context.People.First(x => x.Id == id);
