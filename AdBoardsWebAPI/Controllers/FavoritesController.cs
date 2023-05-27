@@ -21,10 +21,21 @@ namespace AdBoardsWebAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("IsFavorite")]
+        public ActionResult IsFavorite(int AdId, int PersonId)
+        {
+            if (_context.Favorites.FirstOrDefault(x => x.AdId == AdId && x.PersonId == PersonId) != null)
+                return Ok();
+            else
+                return BadRequest();
+        }
 
         [HttpPost("Addition")]
         public async Task<ActionResult> AddFavorite(int AdId, int PersonId)
         {
+            if (_context.Favorites.FirstOrDefault(x => x.AdId == AdId && x.PersonId == PersonId) != null)
+                return BadRequest();
+
             Favorite f = new Favorite();
             f.AdId = AdId;
             f.PersonId = PersonId;

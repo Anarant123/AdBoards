@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors();
+//builder.Services.AddCors();
 builder.Services.AddScoped<AdBoardsContext>();
 
 var app = builder.Build();
@@ -21,7 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors();
+//app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();

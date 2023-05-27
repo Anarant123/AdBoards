@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdBoardsWebAPI.Models.db;
 using AdBoardsWebAPI.DTO;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace AdBoardsWebAPI.Controllers
 {
@@ -21,13 +23,36 @@ namespace AdBoardsWebAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("GetAd")]
+        public ActionResult GetAd(int id)
+        {
+            var ads = _context.Ads.FirstOrDefault(x => x.Id == id);
+            if (ads != null)
+            {
+                return Ok(ads);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet("GetAds")]
         public ActionResult GetAds()
         {
-            var ads = _context.Ads.ToList();
+            var ads = _context.Ads.Include(x => x.Person).Include(x => x.Complaints).ToList();
             if (ads.Any())
             {
-                return Ok(ads);
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Используйте это, если нужно преобразование в camelCase
+                    IgnoreNullValues = true,
+                    ReferenceHandler = ReferenceHandler.Preserve
+                };
+
+                string json = JsonSerializer.Serialize(ads, options);
+
+                return Ok(json);
             }
             else
             {
@@ -53,12 +78,25 @@ namespace AdBoardsWebAPI.Controllers
         [HttpGet("GetFavoritesAds")]
         public ActionResult GetFavoritesAds(int id)
         {
-            Person person = _context.People.First(x => x.Id == id);
-            List<Favorite> ads = person.Favorites.ToList();
+            List<Favorite> f = _context.Favorites.Include(e => e.Ad).Where(x => x.PersonId == id).ToList();
+            List<Ad> ads = new List<Ad>();
+            foreach (var fitem in f)
+            {
+                ads.Add(_context.Ads.Include(e => e.Person).First(x => x.Id == fitem.Ad.Id));
+            }
 
             if (ads.Any())
             {
-                return Ok(ads);
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Используйте это, если нужно преобразование в camelCase
+                    IgnoreNullValues = true,
+                    ReferenceHandler = ReferenceHandler.Preserve
+                };
+
+                string json = JsonSerializer.Serialize(ads, options);
+
+                return Ok(json);
             }
             else
             {
@@ -85,7 +123,6 @@ namespace AdBoardsWebAPI.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(a);
-            //return CreatedAtAction(nameof(GetPerson), new { id = p.Id }, p);
         }
 
         [HttpPut("Update")]
@@ -99,17 +136,24 @@ namespace AdBoardsWebAPI.Controllers
             a.City = ad.City;
             a.Photo = ad.Photo;
             a.CotegorysId = ad.CotegorysId;
-            a.TypeOfAdId = ad.TypeOfAdId;
 
             await _context.SaveChangesAsync();
 
             return Ok(a);
         }
 
-        [HttpDelete("Update")]
+        [HttpDelete("Delete")]
         public async Task<ActionResult<Ad>> DeleteAd(int id)
         {
             Ad a = await _context.Ads.FirstAsync(x => x.Id == id);
+            List<Favorite> favorites = _context.Favorites.Where(x => x.AdId == id).ToList();
+            List<Complaint> complaints = _context.Complaints.Where(x => x.AdId == id).ToList();
+
+            foreach (Favorite favorite in favorites)
+                _context.Favorites.Remove(favorite);
+
+            foreach (Complaint complaint in complaints)
+                _context.Complaints.Remove(complaint);
 
             _context.Ads.Remove(a);
             await _context.SaveChangesAsync();

@@ -26,6 +26,9 @@ namespace AdBoardsWebAPI.Controllers
         [HttpPost("Addition")]
         public async Task<ActionResult> AddComplaint(int AdId, int PersonId)
         {
+            if (_context.Complaints.FirstOrDefault(x => x.AdId == AdId && x.PersonId == PersonId) != null)
+                return BadRequest();
+
             Complaint c = new Complaint();
             c.AdId = AdId;
             c.PersonId = PersonId;
@@ -38,11 +41,12 @@ namespace AdBoardsWebAPI.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<ActionResult> DeleteComplaint(int AdId, int PersonId)
+        public async Task<ActionResult> DeleteComplaint(int AdId)
         {
-            Complaint c = await _context.Complaints.FirstAsync(x => x.AdId == AdId && x.PersonId == PersonId);
+            List<Complaint> complaints = _context.Complaints.Where(x => x.AdId == AdId).ToList();
 
-            _context.Complaints.Remove(c);
+            foreach (var c in complaints)
+                _context.Complaints.Remove(c);
             await _context.SaveChangesAsync();
 
             return Ok();
