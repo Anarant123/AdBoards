@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using MimeKit;
-using MailKit.Net.Smtp;
-using Microsoft.EntityFrameworkCore;
+﻿using AdBoardsWebAPI.DTO;
 using AdBoardsWebAPI.Models.db;
-using AdBoardsWebAPI.DTO;
-using System.Net;
+using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MimeKit;
 
 namespace AdBoardsWebAPI.Controllers
 {
