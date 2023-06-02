@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using AdBoardsWebAPI.Models.db;
-using AdBoardsWebAPI.DTO;
-
 
 namespace AdBoardsWebAPI.Controllers
 {
@@ -21,7 +13,6 @@ namespace AdBoardsWebAPI.Controllers
         {
             _context = context;
         }
-
 
         [HttpPost("Addition")]
         public async Task<ActionResult> AddComplaint(int AdId, int PersonId)
@@ -37,7 +28,6 @@ namespace AdBoardsWebAPI.Controllers
             await _context.SaveChangesAsync();
 
             return Ok();
-            //return CreatedAtAction(nameof(GetPerson), new { id = p.Id }, p);
         }
 
         [HttpDelete("Delete")]

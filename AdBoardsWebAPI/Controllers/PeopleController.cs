@@ -92,7 +92,6 @@ namespace AdBoardsWebAPI.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(p);
-            //return CreatedAtAction(nameof(GetPerson), new { id = p.Id }, p);
         }
 
 		[HttpPost("RecoveryPassword")]
@@ -126,7 +125,6 @@ namespace AdBoardsWebAPI.Controllers
 				}
 				catch(Exception ex)
 				{
-                    Console.WriteLine("fffffffffffffffffffffffff  " + ex.ToString());
 					return BadRequest();
 				}
 			}
@@ -161,12 +159,21 @@ namespace AdBoardsWebAPI.Controllers
 
             if (p != null)
             {
-                var favorites = _context.Favorites.Where(x => x.PersonId == p.Id).ToList();
-                foreach (var f in favorites)
+                var favoritesP = _context.Favorites.Where(x => x.PersonId == p.Id).ToList();
+                foreach (var f in favoritesP)
                     _context.Favorites.Remove(f);
                 var ads = _context.Ads.Where(x => x.PersonId == p.Id).ToList();
                 foreach (var a in ads)
-                    _context.Ads.Remove(a);
+                {
+                    List<Favorite> favorites = _context.Favorites.Where(x => x.AdId == a.Id).ToList();
+                    List<Complaint> complaints = _context.Complaints.Where(x => x.AdId == a.Id).ToList();
+
+                    foreach (Favorite favorite in favorites)
+                        _context.Favorites.Remove(favorite);
+
+                    foreach (Complaint complaint in complaints)
+                        _context.Complaints.Remove(complaint);
+                }
 
                 _context.People.Remove(p);
                 await _context.SaveChangesAsync();

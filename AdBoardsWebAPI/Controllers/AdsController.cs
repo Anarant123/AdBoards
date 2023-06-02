@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AdBoardsWebAPI.Models.db;
 using AdBoardsWebAPI.DTO;
@@ -45,7 +40,7 @@ namespace AdBoardsWebAPI.Controllers
             {
                 var options = new JsonSerializerOptions
                 {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Используйте это, если нужно преобразование в camelCase
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     ReferenceHandler = ReferenceHandler.Preserve
                 };
 
@@ -54,9 +49,7 @@ namespace AdBoardsWebAPI.Controllers
                 return Ok(json);
             }
             else
-            {
                 return BadRequest();
-            }    
         }
 
         [HttpGet("GetMyAds")]
@@ -69,9 +62,7 @@ namespace AdBoardsWebAPI.Controllers
                 return Ok(ads);
             }
             else
-            {
                 return BadRequest();
-            }
         }
 
         [HttpGet("GetFavoritesAds")]
@@ -97,9 +88,7 @@ namespace AdBoardsWebAPI.Controllers
                 return Ok(json);
             }
             else
-            {
                 return BadRequest();
-            }
         }
 
 
