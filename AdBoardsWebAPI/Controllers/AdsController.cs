@@ -46,7 +46,6 @@ namespace AdBoardsWebAPI.Controllers
                 var options = new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Используйте это, если нужно преобразование в camelCase
-                    IgnoreNullValues = true,
                     ReferenceHandler = ReferenceHandler.Preserve
                 };
 
@@ -90,7 +89,6 @@ namespace AdBoardsWebAPI.Controllers
                 var options = new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Используйте это, если нужно преобразование в camelCase
-                    IgnoreNullValues = true,
                     ReferenceHandler = ReferenceHandler.Preserve
                 };
 
@@ -136,6 +134,7 @@ namespace AdBoardsWebAPI.Controllers
             a.City = ad.City;
             a.Photo = ad.Photo;
             a.CotegorysId = ad.CotegorysId;
+            a.TypeOfAdId = ad.TypeOfAdId;
 
             await _context.SaveChangesAsync();
 

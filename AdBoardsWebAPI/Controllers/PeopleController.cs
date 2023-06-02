@@ -25,11 +25,11 @@ namespace AdBoardsWebAPI.Controllers
         }
 
         [HttpGet("GetPeople")]
-        public async Task<ActionResult<Person>> GetPeople()
+        public ActionResult<Person> GetPeople()
         {
             var people = _context.People.ToList();
 
-            if (people.Count < 0)
+            if (people.Count == 0)
             {
                 return NotFound();
             }
@@ -41,7 +41,7 @@ namespace AdBoardsWebAPI.Controllers
         }
 
         [HttpGet("GetCountOfClient")]
-        public async Task<ActionResult<Person>> GetCountOfClient()
+        public ActionResult<Person> GetCountOfClient()
         {
             int count = _context.People.Count();
 
@@ -53,7 +53,6 @@ namespace AdBoardsWebAPI.Controllers
             {
                 return Ok(count);
             }
-
         }
 
         [HttpPost("Authorization")]
@@ -99,7 +98,7 @@ namespace AdBoardsWebAPI.Controllers
 		[HttpPost("RecoveryPassword")]
 		public async Task<ActionResult<Person>> RecoveryPassword(string Login)
 		{
-			Person p = _context.People.FirstOrDefault(x => x.Login == Login);
+			Person p = _context.People.FirstOrDefault(x => x.Login == Login)!;
             if(p != null)
             {
 				try
@@ -158,7 +157,7 @@ namespace AdBoardsWebAPI.Controllers
         [HttpDelete("Delete")]
         public async Task<ActionResult> DeletePerson(string Login)
         {
-            Person p = await _context.People.FirstOrDefaultAsync(x => x.Login == Login);
+            Person p = await _context.People.FirstOrDefaultAsync(x => x.Login == Login)!;
 
             if (p != null)
             {
