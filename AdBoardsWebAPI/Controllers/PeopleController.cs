@@ -117,7 +117,7 @@ namespace AdBoardsWebAPI.Controllers
 
 					return Ok();
 				}
-				catch(Exception ex)
+				catch
 				{
 					return BadRequest();
 				}

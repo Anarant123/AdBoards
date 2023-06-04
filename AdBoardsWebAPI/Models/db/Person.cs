@@ -12,7 +12,7 @@ public partial class Person
     [JsonPropertyName("login")]
     public string? Login { get; set; }
 
-    [JsonPropertyName("password")]
+    [JsonIgnore]
     public string? Password { get; set; }
 
     [JsonPropertyName("name")]
