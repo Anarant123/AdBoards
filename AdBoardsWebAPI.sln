@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoardsWebAPI", "AdBoardsWebAPI\AdBoardsWebAPI.csproj", "{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoardsWeb", "..\AdBoardsWeb\AdBoardsWeb\AdBoardsWeb.csproj", "{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoards.ApiClient", "AdBoards.ApiClient\AdBoards.ApiClient.csproj", "{19E92F3E-5272-42C0-AD08-7B764126572D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E92F3E-5272-42C0-AD08-7B764126572D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E92F3E-5272-42C0-AD08-7B764126572D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E92F3E-5272-42C0-AD08-7B764126572D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E92F3E-5272-42C0-AD08-7B764126572D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

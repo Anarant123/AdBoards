@@ -1,29 +1,111 @@
-using AdBoardsWebAPI.Models.db;
+using System.Text;
+using AdBoardsWebAPI.Auth;
+using AdBoardsWebAPI.Data;
+using AdBoardsWebAPI.DomainTypes.Enums;
+using AdBoardsWebAPI.Extensions;
+using AdBoardsWebAPI.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Services configuration.
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection("Smtp"));
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddCors();
+builder.Services
+    .AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        };
+    });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(Policies.NormalUser, pb =>
+    {
+        var policy = pb.RequireAuthenticatedUser()
+            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+            .Build();
+        options.DefaultPolicy = policy;
+    });
+    options.AddPolicy(Policies.Admin, pb =>
+    {
+        pb.RequireAuthenticatedUser()
+            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+            .RequireClaim("rightId", RightType.Admin.ToString());
+    });
+});
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("JWT", new OpenApiSecurityScheme
+    {
+        Description = "JWT with Bearer",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "ApiKeyScheme"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Reference = new OpenApiReference
+                {
+                    Id = "JWT",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new List<string>()
+        }
+    });
+});
 
-//builder.Services.AddCors();
-builder.Services.AddScoped<AdBoardsContext>();
+builder.Services.AddDbContext<AdBoardsContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStrings:AdBoards"]));
+
+// Custom services.
+builder.Services.AddScoped<FileManager>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// App configuration.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-//app.UseCors();
+app.UseStaticFiles();
+
+app.UseCors();
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+// Mapping.
+app.MapAdEndpoints();
+app.MapComplaintEndpoints();
+app.MapFavoritesEndpoints();
+app.MapPeopleEndpoints();
 
+// Starting the app.
 app.Run();

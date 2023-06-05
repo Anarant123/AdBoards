@@ -1,0 +1,5 @@
+wwwroot/images/user/*
+!wwwroot/images/user/icon_image_person.png
+
+wwwroot/images/ad/*
+!wwwroot/images/ad/icon_image.png

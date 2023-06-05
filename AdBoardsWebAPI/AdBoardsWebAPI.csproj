@@ -1,21 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MailKit" Version="4.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MailKit" Version="4.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0-preview.4.23261.6"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.4"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Contracts\Requests\Validators\"/>
+        <Folder Include="Contracts\Responses\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_edit.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_favorites.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_image.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_image_person.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_loop.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_mail.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_map_location.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_my_ads.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_person.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_phone.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_plus.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_price.png"/>
+    </ItemGroup>
 
 </Project>
