@@ -97,7 +97,7 @@ public static class PeopleEndpoints
         group.MapPost("RecoveryPassword", async (AdBoardsContext dbContext, IOptions<SmtpOptions> smtpOptions,
             ClaimsPrincipal user) =>
         {
-            var id = int.Parse(user.Claims.FirstOrDefault(x => x.Type == "id")!.Value);
+            var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
             var p = await dbContext.People.FindAsync(id);
             if (p is null) return Results.NotFound();
@@ -134,7 +134,7 @@ public static class PeopleEndpoints
 
         group.MapPut("Update", async (UpdatePersonModel model, AdBoardsContext context, ClaimsPrincipal user) =>
         {
-            var id = int.Parse(user.Claims.FirstOrDefault(x => x.Type == "id")!.Value);
+            var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
             var person = await context.People.FindAsync(id);
             if (person is null) return Results.NotFound();
@@ -162,7 +162,7 @@ public static class PeopleEndpoints
         group.MapPut("Photo", async (IFormFile? photo, AdBoardsContext context, FileManager fileManager,
             ClaimsPrincipal user) =>
         {
-            var id = int.Parse(user.Claims.FirstOrDefault(x => x.Type == "id")!.Value);
+            var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
             var person = await context.People.FindAsync(id);
             if (person is null) return Results.NotFound();

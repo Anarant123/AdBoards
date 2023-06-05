@@ -7,8 +7,6 @@ public record UpdateAdModel
     string? Name,
     string? Description,
     string? City,
-    IFormFile? Photo,
-    DateOnly? Date,
     int? CotegorysId,
     int? TypeOfAdId
 );

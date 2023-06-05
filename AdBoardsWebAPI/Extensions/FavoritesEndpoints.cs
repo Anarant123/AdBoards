@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AdBoardsWebAPI.Data;
 using AdBoardsWebAPI.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,18 +19,20 @@ public static class FavoritesEndpoints
                 : Results.BadRequest();
         });
 
-        group.MapPost("Addition", async (int adId, int personId, AdBoardsContext context) =>
+        group.MapPost("Addition", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
         {
-            if (await context.Favorites.AnyAsync(x => x.AdId == adId && x.PersonId == personId))
+            var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
+            
+            if (await context.Favorites.AnyAsync(x => x.AdId == adId && x.PersonId == userId)) 
                 return Results.BadRequest();
 
-            var f = new Favorite
+            var favorite = new Favorite
             {
                 AdId = adId,
-                PersonId = personId
+                PersonId = userId
             };
 
-            context.Favorites.Add(f);
+            context.Favorites.Add(favorite);
             await context.SaveChangesAsync();
 
             return Results.Ok();

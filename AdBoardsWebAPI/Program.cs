@@ -103,8 +103,8 @@ app.UseAuthorization();
 
 // Mapping.
 app.MapAdEndpoints();
-app.MapComplaintEndpoints();
-app.MapFavoritesEndpoints();
+// app.MapComplaintEndpoints();
+// app.MapFavoritesEndpoints();
 app.MapPeopleEndpoints();
 
 // Starting the app.
