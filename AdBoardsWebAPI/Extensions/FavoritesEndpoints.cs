@@ -11,10 +11,11 @@ public static class FavoritesEndpoints
     {
         var group = app.MapGroup("Favorites");
 
-        group.MapGet("IsFavorite", async (int adId, int personId, AdBoardsContext context) =>
+        group.MapGet("IsFavorite", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
         {
-            return await context.Favorites.FirstOrDefaultAsync(x => x.AdId == adId && x.PersonId == personId)
-                is not null
+            var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
+
+            return await context.Favorites.AnyAsync(x => x.AdId == adId && x.PersonId == userId)
                 ? Results.Ok()
                 : Results.BadRequest();
         });
@@ -22,8 +23,8 @@ public static class FavoritesEndpoints
         group.MapPost("Addition", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
-            
-            if (await context.Favorites.AnyAsync(x => x.AdId == adId && x.PersonId == userId)) 
+
+            if (await context.Favorites.AnyAsync(x => x.AdId == adId && x.PersonId == userId))
                 return Results.BadRequest();
 
             var favorite = new Favorite
@@ -38,9 +39,11 @@ public static class FavoritesEndpoints
             return Results.Ok();
         });
 
-        group.MapDelete("Delete", async (int adId, int personId, AdBoardsContext context) =>
+        group.MapDelete("Delete", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
         {
-            var ad = await context.Favorites.FirstOrDefaultAsync(x => x.AdId == adId && x.PersonId == personId);
+            var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
+
+            var ad = await context.Favorites.FirstOrDefaultAsync(x => x.AdId == adId && x.PersonId == userId);
             if (ad is null) return Results.NotFound();
 
             context.Favorites.Remove(ad);
