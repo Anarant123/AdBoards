@@ -1,4 +1,6 @@
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using AdBoards.ApiClient.Contracts.Responses;
 
 namespace AdBoards.ApiClient.Extensions;
@@ -11,6 +13,23 @@ public static class PeopleExtensions
         var model = await response.Content.ReadFromJsonAsync<AuthorizedModel>();
 
         return model;
+    }
+
+    public static async Task<bool> Registr(this AdBoardsApiClient api, PersonReg person)
+    {
+        if (person.Password != person.ConfirmPassword)
+        {
+            return false;
+        }
+
+        using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
+        using var response = await api.HttpClient.PostAsync($"People/Registration", jsonContent);
+        var model = await response.Content.ReadFromJsonAsync<AuthorizedModel>();
+
+        if(response.IsSuccessStatusCode)
+            return true;
+
+        return false;
     }
 
     public static async Task<Person?> GetMe(this AdBoardsApiClient api)
