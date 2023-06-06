@@ -16,6 +16,15 @@ public static class AdExtensions
         return ads!;
     }
 
+    public static async Task<Ad?> GetAd(this AdBoardsApiClient apiClient, int id)
+    {
+        using var response = await apiClient.HttpClient.GetAsync($"Ads/GetAd?id={id}");
+
+        if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<Ad>();
+
+        return null;
+    }
+
     public static async Task<Ad?> AddAd(this AdBoardsApiClient apiClient, AddAdModel model)
     {
         using var jsonContent = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8, "application/json");
@@ -30,8 +39,11 @@ public static class AdExtensions
     {
         if (model.Photo is null) return null;
 
-        using var content = new StreamContent(model.Photo.OpenReadStream());
-        using var response = await apiClient.HttpClient.PostAsync($"Ads/{model.Id}/Photo", content);
+        var stream = model.Photo.OpenReadStream();
+        var multipart = new MultipartFormDataContent();
+        multipart.Add(new StreamContent(stream), "photo", model.Photo.FileName);
+
+        using var response = await apiClient.HttpClient.PutAsync($"Ads/{model.Id}/Photo", multipart);
 
         if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<Ad>();
 

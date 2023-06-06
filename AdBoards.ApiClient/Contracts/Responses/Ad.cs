@@ -22,6 +22,8 @@ public class Ad
 
     public DateTime Date { get; set; }
 
+    public bool IsFavorite { get; set; } = false;
+
     public IEnumerable<Complaint> Complaints { get; set; } = Enumerable.Empty<Complaint>();
 
     public Category Category { get; set; } = null!;
