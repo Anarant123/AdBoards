@@ -10,7 +10,7 @@ public static class ComplaintEndpoints
 {
     public static WebApplication MapComplaintEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("Complaint/");
+        var group = app.MapGroup("Complaint/").WithTags("Complaint");
 
         group.MapPost("Addition", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
         {

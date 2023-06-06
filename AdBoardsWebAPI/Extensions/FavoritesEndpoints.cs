@@ -9,7 +9,7 @@ public static class FavoritesEndpoints
 {
     public static WebApplication MapFavoritesEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("Favorites");
+        var group = app.MapGroup("Favorites").WithTags("Favorites");;
 
         group.MapGet("IsFavorite", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
         {

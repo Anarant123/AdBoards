@@ -20,7 +20,7 @@ public static class PeopleEndpoints
 {
     public static WebApplication MapPeopleEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("People");
+        var group = app.MapGroup("People").WithTags("People");
 
         group.MapGet("GetPeople", async (AdBoardsContext context) =>
         {

@@ -11,7 +11,7 @@ public static class AdEndpoints
 {
     public static WebApplication MapAdEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("Ads/");
+        var group = app.MapGroup("Ads/").WithTags("Ads");
 
         group.MapGet("GetAd", async (int id, AdBoardsContext context) =>
         {
