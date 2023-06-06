@@ -62,7 +62,7 @@ public static class PeopleExtensions
         }
     }
 
-    public static async Task<Person?> UpdatePersonPhoto(this AdBoardsApiClient apiClient, EditPersonModel model)
+    public static async Task<Person?> UpdatePersonPhoto(this AdBoardsApiClient api, EditPersonModel model)
     {
         if (model.Photo is null) return null;
 
@@ -72,11 +72,31 @@ public static class PeopleExtensions
             { new StreamContent(stream), "photo", model.Photo.FileName }
         };
 
-        using var response = await apiClient.HttpClient.PutAsync($"People/Photo", multipart);
+        using var response = await api.HttpClient.PutAsync($"People/Photo", multipart);
 
         if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<Person>();
 
         return null;
+    }
+
+    public static async Task<int> GetCountOfClient(this AdBoardsApiClient api)
+    {
+        using var response = await api.HttpClient.GetAsync($"People/GetCountOfClient");
+
+        var count = Convert.ToInt32(await response.Content.ReadAsStringAsync());
+        return count;
+    }
+
+    public static async Task<List<Person>?> GetPeople(this AdBoardsApiClient api)
+    {
+        using var response = await api.HttpClient.GetAsync("People/GetPeople");
+        return await response.Content.ReadFromJsonAsync<List<Person>>();
+    }
+
+    public static async Task<bool> DeletePeople(this AdBoardsApiClient api, string login)
+    {
+        using var response = await api.HttpClient.DeleteAsync($"People/Delete?login={login}");
+        return response.IsSuccessStatusCode;
     }
 
 }
