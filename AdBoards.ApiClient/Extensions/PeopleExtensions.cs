@@ -24,12 +24,16 @@ public static class PeopleExtensions
 
         using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
         using var response = await api.HttpClient.PostAsync($"People/Registration", jsonContent);
-        var model = await response.Content.ReadFromJsonAsync<AuthorizedModel>();
 
         if(response.IsSuccessStatusCode)
             return true;
 
         return false;
+    }
+
+    public static async Task Recover(this AdBoardsApiClient api, string Login)
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Post, $"People/RecoveryPassword?Login={Login}");
     }
 
     public static async Task<Person?> GetMe(this AdBoardsApiClient api)
