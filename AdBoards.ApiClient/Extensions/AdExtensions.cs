@@ -41,8 +41,10 @@ public static class AdExtensions
         if (model.Photo is null) return null;
 
         var stream = model.Photo.OpenReadStream();
-        var multipart = new MultipartFormDataContent();
-        multipart.Add(new StreamContent(stream), "photo", model.Photo.FileName);
+        var multipart = new MultipartFormDataContent
+        {
+            { new StreamContent(stream), "photo", model.Photo.FileName }
+        };
 
         using var response = await apiClient.HttpClient.PutAsync($"Ads/{model.Id}/Photo", multipart);
 
