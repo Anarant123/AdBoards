@@ -29,4 +29,14 @@ public class Ad
     public Person Person { get; set; } = null!;
 
     public AdType AdType { get; set; } = null!;
+
+    public string getPrice
+    {
+        get => Price + " ₽";
+    }
+
+    public string getType
+    {
+        get => AdType.Name;
+    }
 }
