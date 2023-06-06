@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace AdBoards.ApiClient.Contracts.Responses;
+﻿namespace AdBoards.ApiClient.Contracts.Responses;
 
 public class Person
 {
@@ -12,7 +10,7 @@ public class Person
 
     public string? City { get; set; }
 
-    public DateOnly Birthday { get; set; }
+    public DateTime Birthday { get; set; }
 
     public string Phone { get; set; } = null!;
 

@@ -103,25 +103,22 @@ public static class PeopleEndpoints
         }).AllowAnonymous();
 
         group.MapPost("RecoveryPassword", async (AdBoardsContext dbContext, IOptions<SmtpOptions> smtpOptions,
-            ClaimsPrincipal user) =>
+            string login) =>
         {
-            var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
-
-            var p = await dbContext.People.FindAsync(id);
+            var p = await dbContext.People.FirstOrDefaultAsync(x => x.Login == login);
             if (p is null) return Results.NotFound();
 
             var smtp = smtpOptions.Value;
-
             using var emailMessage = new MimeMessage
             {
                 Subject = "Восстановление пароля",
                 Body = new TextPart(TextFormat.Html)
                 {
                     Text = "Ваш пароль от AdBoards: " + p.Password
-                }
+                },
+                From = { new MailboxAddress("Администрация сайта", smtp.Address) },
+                To = { new MailboxAddress("", p.Email) }
             };
-            emailMessage.From.Add(new MailboxAddress("Администрация сайта", smtp.Address));
-            emailMessage.To.Add(new MailboxAddress("", p.Email));
 
             using var client = new SmtpClient();
 
@@ -138,7 +135,7 @@ public static class PeopleEndpoints
             {
                 return Results.BadRequest();
             }
-        });
+        }).AllowAnonymous();
 
         group.MapPut("Update", async (UpdatePersonModel model, AdBoardsContext context, ClaimsPrincipal user) =>
         {

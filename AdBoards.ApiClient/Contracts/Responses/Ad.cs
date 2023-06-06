@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace AdBoards.ApiClient.Contracts.Responses;
+﻿namespace AdBoards.ApiClient.Contracts.Responses;
 
 public class Ad
 {
@@ -22,7 +20,7 @@ public class Ad
         set => _photoName = value;
     }
 
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
 
     public IEnumerable<Complaint> Complaints { get; set; } = Enumerable.Empty<Complaint>();
 

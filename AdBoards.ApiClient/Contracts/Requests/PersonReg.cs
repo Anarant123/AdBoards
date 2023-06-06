@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace AdBoards.ApiClient.Contracts.Responses;
+﻿namespace AdBoards.ApiClient.Contracts.Requests;
 
 public class PersonReg
 {
@@ -12,7 +10,7 @@ public class PersonReg
 
     public string ConfirmPassword { get; set; } = null!;
 
-    public DateOnly Birthday { get; set; }
+    public DateTime Birthday { get; set; }
 
     public string Phone { get; set; } = null!;
 

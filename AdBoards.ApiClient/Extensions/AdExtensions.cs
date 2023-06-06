@@ -17,7 +17,5 @@ public static class AdExtensions
     {
         using var response = await apiClient.HttpClient.GetAsync("Ads/Addition");
         var ads = await response.Content.ReadFromJsonAsync<List<Ad>>();
-
-        return;
     }
 }

@@ -1,6 +1,4 @@
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using AdBoards.ApiClient.Contracts.Responses;
 
 namespace AdBoards.ApiClient;
 
