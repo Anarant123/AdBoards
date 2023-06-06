@@ -4,35 +4,27 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MailKit" Version="4.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5"/>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2"/>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0-preview.4.23261.6"/>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.4"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        <PackageReference Include="MailKit" Version="4.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0-preview.4.23261.6" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Contracts\Requests\Validators\"/>
-        <Folder Include="Contracts\Responses\"/>
+        <Folder Include="Contracts\Requests\Validators\" />
+        <Folder Include="Contracts\Responses\" />
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_edit.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_favorites.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_image.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_image_person.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_loop.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_mail.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_map_location.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_my_ads.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_person.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_phone.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_plus.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\content\static\drawable0\icon_price.png"/>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using AdBoardsWebAPI.DomainTypes.Enums;
+﻿using System.Text.Json.Serialization;
+using AdBoardsWebAPI.DomainTypes.Enums;
 
 namespace AdBoardsWebAPI.Data.Models;
 
@@ -24,11 +25,11 @@ public class Person
 
     public RightType RightId { get; set; }
 
-    public ICollection<Ad> Ads { get; set; } = new List<Ad>();
+    [JsonIgnore] public ICollection<Ad> Ads { get; set; } = new List<Ad>();
 
-    public ICollection<Complaint> Complaints { get; set; } = new List<Complaint>();
+    [JsonIgnore] public ICollection<Complaint> Complaints { get; set; } = new List<Complaint>();
 
-    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+    [JsonIgnore] public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
 
     public Right Right { get; set; } = null!;
 }
