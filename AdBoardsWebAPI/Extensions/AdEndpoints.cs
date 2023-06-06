@@ -45,7 +45,8 @@ public static class AdEndpoints
             return Results.Ok(ads);
         });
 
-        group.MapPost("Addition", async (AdModel model, AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapPost("Addition", async (AdModel model, AdBoardsContext context, ClaimsPrincipal user,
+            FileManager fileManager) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
             var a = new Ad
@@ -57,7 +58,8 @@ public static class AdEndpoints
                 Date = DateOnly.FromDateTime(DateTime.Today),
                 CategoryId = model.CotegorysId,
                 PersonId = userId,
-                AdTypeId = model.TypeOfAdId
+                AdTypeId = model.TypeOfAdId,
+                PhotoName = await fileManager.SaveAdPhoto(null)
             };
 
             context.Ads.Add(a);
