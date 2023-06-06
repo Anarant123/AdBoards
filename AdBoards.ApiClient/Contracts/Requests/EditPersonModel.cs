@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Http;
+using System.Text.Json.Serialization;
+
 namespace AdBoards.ApiClient.Contracts.Requests;
 
 public class EditPersonModel
@@ -19,4 +22,5 @@ public class EditPersonModel
         get => $"https://adboards.site/{_photoName}";
         set => _photoName = value;
     }
+    [JsonIgnore] public IFormFile? Photo { get; set; }
 }

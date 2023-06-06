@@ -17,6 +17,22 @@ public static class AdExtensions
         return ads!;
     }
 
+    public static async Task<List<Ad>> GetMyAds(this AdBoardsApiClient apiClient)
+    {
+        using var response = await apiClient.HttpClient.GetAsync("Ads/GetMyAds");
+        var ads = await response.Content.ReadFromJsonAsync<List<Ad>>();
+
+        return ads!;
+    }
+
+    public static async Task<List<Ad>> GetFavoritesAds(this AdBoardsApiClient apiClient)
+    {
+        using var response = await apiClient.HttpClient.GetAsync("Ads/GetFavoritesAds");
+        var ads = await response.Content.ReadFromJsonAsync<List<Ad>>();
+
+        return ads!;
+    }
+
     public static async Task<Ad?> GetAd(this AdBoardsApiClient apiClient, int id)
     {
         using var response = await apiClient.HttpClient.GetAsync($"Ads/GetAd?id={id}");
@@ -25,6 +41,8 @@ public static class AdExtensions
 
         return null;
     }
+
+
 
     public static async Task<Ad?> AddAd(this AdBoardsApiClient apiClient, AddAdModel model)
     {

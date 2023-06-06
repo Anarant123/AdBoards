@@ -44,4 +44,39 @@ public static class PeopleExtensions
         using var response = await api.HttpClient.GetAsync("People/GetMe");
         return await response.Content.ReadFromJsonAsync<Person>();
     }
+
+    public static async Task<Person?> PersonUpdate(this AdBoardsApiClient api, EditPersonModel person)
+    {
+
+        using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
+        using var response = await api.HttpClient.PutAsync($"People/Update", jsonContent);
+
+        try
+        {
+            var model = await response.Content.ReadFromJsonAsync<Person>();
+            return model;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    public static async Task<Person?> UpdatePersonPhoto(this AdBoardsApiClient apiClient, EditPersonModel model)
+    {
+        if (model.Photo is null) return null;
+
+        var stream = model.Photo.OpenReadStream();
+        var multipart = new MultipartFormDataContent
+        {
+            { new StreamContent(stream), "photo", model.Photo.FileName }
+        };
+
+        using var response = await apiClient.HttpClient.PutAsync($"People/Photo", multipart);
+
+        if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<Person>();
+
+        return null;
+    }
+
 }
