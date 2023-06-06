@@ -17,5 +17,13 @@ public static class FavoritesExtensions
         return false;
     }
 
+    public static async Task<bool> DeleteFromFavorites(this AdBoardsApiClient apiClient, int adId)
+    {
+        using var response = await apiClient.HttpClient.DeleteAsync($"Favorites/Delete?adId={adId}");
+
+        if (response.IsSuccessStatusCode) return true;
+
+        return false;
+    }
 
 }
