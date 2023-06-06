@@ -6,6 +6,7 @@ using AdBoardsWebAPI.Extensions;
 using AdBoardsWebAPI.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -83,6 +84,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddDbContext<AdBoardsContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStrings:AdBoards"]));
+builder.Services.AddDirectoryBrowser();
 
 // Custom services.
 builder.Services.AddScoped<FileManager>();
@@ -100,6 +102,21 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseStaticFiles();
+
+var fileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.WebRootPath, "images"));
+const string requestPath = "/images";
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = fileProvider,
+    RequestPath = requestPath
+});
+
+app.UseDirectoryBrowser(new DirectoryBrowserOptions
+{
+    FileProvider = fileProvider,
+    RequestPath = requestPath
+});
 
 app.UseCors();
 app.UseAuthentication();
