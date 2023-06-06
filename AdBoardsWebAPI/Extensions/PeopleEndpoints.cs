@@ -80,7 +80,7 @@ public static class PeopleEndpoints
                 Password = model.Password,
                 Name = model.Name,
                 City = model.City,
-                Birthday = model.Birthday,
+                Birthday = DateOnly.FromDateTime(model.Birthday),
                 Phone = model.Phone,
                 Email = model.Email,
                 RightId = RightType.Normal,
@@ -147,7 +147,7 @@ public static class PeopleEndpoints
             person.Name = model.Name;
             person.City = model.City;
 
-            if (model.Birthday is not null) person.Birthday = model.Birthday.Value;
+            if (model.Birthday is not null) person.Birthday = DateOnly.FromDateTime(model.Birthday.Value);
             if (model.Phone is not null) person.Phone = model.Phone;
             if (model.Email is not null) person.Email = model.Email;
 

@@ -6,7 +6,7 @@ public record RegisterModel
     string Password,
     string? Name,
     string? City,
-    DateOnly Birthday,
+    DateTime Birthday,
     string Phone,
     string Email
 );

@@ -4,7 +4,7 @@ public record UpdatePersonModel
 (
     string? Name,
     string? City,
-    DateOnly? Birthday,
+    DateTime? Birthday,
     string? Phone,
     string? Email
 );
