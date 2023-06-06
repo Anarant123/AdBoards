@@ -18,7 +18,6 @@
 
     <ItemGroup>
         <Folder Include="Contracts\Requests\Validators\" />
-        <Folder Include="Contracts\Responses\" />
     </ItemGroup>
 
     <ItemGroup>

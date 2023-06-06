@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using AdBoards.Domain.Enums;
 using AdBoardsWebAPI.Contracts.Requests.Models;
+using AdBoardsWebAPI.Contracts.Responses;
 using AdBoardsWebAPI.Data;
 using AdBoardsWebAPI.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ public static class AdEndpoints
     {
         var group = app.MapGroup("Ads/").WithTags("Ads");
 
-        group.MapGet("GetAd", async (int id, AdBoardsContext context) =>
+        group.MapGet("GetAd", async (int id, AdBoardsContext context, ClaimsPrincipal user) =>
         {
             var ad = await context.Ads
                 .Include(x => x.Complaints)
@@ -21,7 +22,18 @@ public static class AdEndpoints
                 .Include(x => x.Person)
                 .Include(x => x.AdType)
                 .FirstOrDefaultAsync(x => x.Id == id);
-            return ad is null ? Results.BadRequest() : Results.Ok(ad);
+            if (ad is null) return Results.NotFound();
+
+            var dto = AdDto.Map(ad, false);
+            var userIdClaim = user.Claims.FirstOrDefault(x => x.Type == "id")?.Value;
+
+            if (userIdClaim is not null)
+            {
+                var userId = int.Parse(userIdClaim);
+                dto.IsFavorite = await context.Favorites.AnyAsync(x => x.PersonId == userId && x.AdId == id);
+            }
+
+            return Results.Ok(dto);
         }).AllowAnonymous();
 
         group.MapGet("GetAds", async (AdBoardsContext context) =>
