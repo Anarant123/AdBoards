@@ -115,10 +115,10 @@ public static class PeopleEndpoints
                 Body = new TextPart(TextFormat.Html)
                 {
                     Text = "Ваш пароль от AdBoards: " + p.Password
-                },
-                From = { new MailboxAddress("Администрация сайта", smtp.Address) },
-                To = { new MailboxAddress("", p.Email) }
+                }
             };
+            emailMessage.From.Add(new MailboxAddress("Администрация сайта", smtp.Address));
+            emailMessage.To.Add(new MailboxAddress("", p.Email));
 
             using var client = new SmtpClient();
 
