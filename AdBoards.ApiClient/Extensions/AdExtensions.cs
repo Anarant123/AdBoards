@@ -41,9 +41,7 @@ public static class AdExtensions
 
         return null;
     }
-
-
-
+    
     public static async Task<Ad?> AddAd(this AdBoardsApiClient apiClient, AddAdModel model)
     {
         using var jsonContent = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8, "application/json");

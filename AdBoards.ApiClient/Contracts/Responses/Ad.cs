@@ -22,7 +22,7 @@ public class Ad
 
     public DateTime Date { get; set; }
 
-    public bool IsFavorite { get; set; } = false;
+    public bool IsFavorite { get; set; }
 
     public IEnumerable<Complaint> Complaints { get; set; } = Enumerable.Empty<Complaint>();
 
