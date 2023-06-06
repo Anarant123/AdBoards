@@ -1,11 +1,11 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AdBoards.Domain.Enums;
 using AdBoardsWebAPI.Auth;
 using AdBoardsWebAPI.Contracts.Requests.Models;
 using AdBoardsWebAPI.Data;
 using AdBoardsWebAPI.Data.Models;
-using AdBoardsWebAPI.DomainTypes.Enums;
 using AdBoardsWebAPI.Options;
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
@@ -24,9 +24,15 @@ public static class PeopleEndpoints
 
         group.MapGet("GetPeople", async (AdBoardsContext context) =>
         {
-            var people = await context.People.ToListAsync();
+            var people = await context.People.Include(x => x.Right).ToListAsync();
             return people.Count == 0 ? Results.NotFound() : Results.Ok(people);
         }).RequireAuthorization(Policies.Admin);
+
+        group.MapGet("GetMe", async (AdBoardsContext context, ClaimsPrincipal user) =>
+        {
+            var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
+            return await context.People.Include(x => x.Right).FirstOrDefaultAsync(x => x.Id == id);
+        });
 
         group.MapGet("GetCountOfClient", async (AdBoardsContext context) =>
         {
@@ -34,10 +40,12 @@ public static class PeopleEndpoints
             return count == 0 ? Results.NotFound() : Results.Ok(count);
         }).RequireAuthorization(Policies.Admin);
 
-        group.MapPost("Authorization", async (string login, string password, AdBoardsContext context,
+        group.MapGet("Authorization", async (string login, string password, AdBoardsContext context,
             IOptions<JwtOptions> jwtOptions) =>
         {
-            var person = await context.People.FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
+            var person = await context.People
+                .Include(x => x.Right)
+                .FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
             if (person is null) return Results.BadRequest();
 
             var key = Encoding.ASCII.GetBytes(jwtOptions.Value.Key);
@@ -136,7 +144,7 @@ public static class PeopleEndpoints
         {
             var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
-            var person = await context.People.FindAsync(id);
+            var person = await context.People.Include(x => x.Right).FirstOrDefaultAsync(x => x.Id == id);
             if (person is null) return Results.NotFound();
 
             person.Name = model.Name;
@@ -164,14 +172,14 @@ public static class PeopleEndpoints
         {
             var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
-            var person = await context.People.FindAsync(id);
+            var person = await context.People.Include(x => x.Right).FirstOrDefaultAsync(x => x.Id == id);
             if (person is null) return Results.NotFound();
 
             person.PhotoName = await fileManager.SaveUserPhoto(photo);
 
             await context.SaveChangesAsync();
 
-            return Results.Ok();
+            return Results.Ok(person);
         });
 
         group.MapDelete("Delete", async (string login, AdBoardsContext context) =>

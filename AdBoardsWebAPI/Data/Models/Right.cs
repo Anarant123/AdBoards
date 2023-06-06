@@ -1,4 +1,5 @@
-﻿using AdBoardsWebAPI.DomainTypes.Enums;
+﻿using System.Text.Json.Serialization;
+using AdBoards.Domain.Enums;
 
 namespace AdBoardsWebAPI.Data.Models;
 
@@ -8,5 +9,5 @@ public class Right
 
     public string Name { get; set; } = null!;
 
-    public ICollection<Person> People { get; set; } = new List<Person>();
+    [JsonIgnore] public ICollection<Person> People { get; set; } = new List<Person>();
 }

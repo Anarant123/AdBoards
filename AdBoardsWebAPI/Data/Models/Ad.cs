@@ -1,4 +1,6 @@
-﻿namespace AdBoardsWebAPI.Data.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace AdBoardsWebAPI.Data.Models;
 
 public class Ad
 {
@@ -16,11 +18,11 @@ public class Ad
 
     public DateOnly Date { get; set; }
 
-    public int CategoryId { get; set; }
+    [JsonIgnore] public int CategoryId { get; set; }
 
-    public int PersonId { get; set; }
+    [JsonIgnore] public int PersonId { get; set; }
 
-    public int AdTypeId { get; set; }
+    [JsonIgnore] public int AdTypeId { get; set; }
 
     public AdType AdType { get; set; } = null!;
 
@@ -28,7 +30,7 @@ public class Ad
 
     public ICollection<Complaint> Complaints { get; set; } = new List<Complaint>();
 
-    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+    [JsonIgnore] public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
 
     public Person Person { get; set; } = null!;
 }

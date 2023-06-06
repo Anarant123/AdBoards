@@ -1,4 +1,6 @@
-﻿namespace AdBoardsWebAPI.Data.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace AdBoardsWebAPI.Data.Models;
 
 public class Complaint
 {
@@ -8,7 +10,7 @@ public class Complaint
 
     public int PersonId { get; set; }
 
-    public virtual Ad Ad { get; set; } = null!;
+    [JsonIgnore] public virtual Ad Ad { get; set; } = null!;
 
-    public Person Person { get; set; } = null!;
+    [JsonIgnore] public Person Person { get; set; } = null!;
 }

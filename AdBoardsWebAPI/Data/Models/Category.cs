@@ -1,4 +1,6 @@
-﻿namespace AdBoardsWebAPI.Data.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace AdBoardsWebAPI.Data.Models;
 
 public class Category
 {
@@ -6,5 +8,5 @@ public class Category
 
     public string Name { get; set; } = null!;
 
-    public ICollection<Ad> Ads { get; set; } = new List<Ad>();
+    [JsonIgnore] public ICollection<Ad> Ads { get; set; } = new List<Ad>();
 }

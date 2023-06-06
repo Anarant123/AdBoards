@@ -12,4 +12,12 @@ public static class AdExtensions
 
         return ads!;
     }
+
+    public static async Task AddAd(this AdBoardsApiClient apiClient)
+    {
+        using var response = await apiClient.HttpClient.GetAsync("Ads/Addition");
+        var ads = await response.Content.ReadFromJsonAsync<List<Ad>>();
+
+        return;
+    }
 }

@@ -4,32 +4,27 @@ namespace AdBoards.ApiClient.Contracts.Responses;
 
 public class Person
 {
-    [JsonPropertyName("id")] public int Id { get; set; }
+    public int Id { get; set; }
 
-    [JsonPropertyName("login")] public string? Login { get; set; }
+    public string Login { get; set; } = null!;
 
-    [JsonPropertyName("password")] public string? Password { get; set; }
+    public string? Name { get; set; }
 
-    [JsonPropertyName("name")] public string? Name { get; set; }
+    public string? City { get; set; }
 
-    [JsonPropertyName("city")] public string? City { get; set; }
+    public DateOnly Birthday { get; set; }
 
-    [JsonPropertyName("birthday")] public DateTime? Birthday { get; set; }
+    public string Phone { get; set; } = null!;
 
-    [JsonPropertyName("phone")] public string? Phone { get; set; }
+    public string Email { get; set; } = null!;
 
-    [JsonPropertyName("email")] public string? Email { get; set; }
+    private string _photoName = null!;
 
-    [JsonPropertyName("photo")] public byte[]? Photo { get; set; }
+    public string PhotoName
+    {
+        get => $"https://adboards.site/{_photoName}";
+        set => _photoName = value;
+    }
 
-    [JsonPropertyName("rightId")] public int? RightId { get; set; }
-
-    [JsonPropertyName("ads")] public virtual ICollection<Ad> Ads { get; set; } = new List<Ad>();
-
-    [JsonPropertyName("complaints")]
-    public virtual ICollection<Complaint> Complaints { get; set; } = new List<Complaint>();
-
-    [JsonPropertyName("favorites")] public virtual ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
-
-    [JsonPropertyName("right")] public virtual Right? Right { get; set; }
+    public Right Right { get; set; } = null!;
 }

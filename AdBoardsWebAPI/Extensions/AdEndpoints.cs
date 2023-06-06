@@ -1,8 +1,8 @@
 using System.Security.Claims;
+using AdBoards.Domain.Enums;
 using AdBoardsWebAPI.Contracts.Requests.Models;
 using AdBoardsWebAPI.Data;
 using AdBoardsWebAPI.Data.Models;
-using AdBoardsWebAPI.DomainTypes.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdBoardsWebAPI.Extensions;
@@ -15,20 +15,36 @@ public static class AdEndpoints
 
         group.MapGet("GetAd", async (int id, AdBoardsContext context) =>
         {
-            var ad = await context.Ads.Include(x => x.Person).FirstOrDefaultAsync(x => x.Id == id);
+            var ad = await context.Ads
+                .Include(x => x.Complaints)
+                .Include(x => x.Category)
+                .Include(x => x.Person)
+                .Include(x => x.AdType)
+                .FirstOrDefaultAsync(x => x.Id == id);
             return ad is null ? Results.BadRequest() : Results.Ok(ad);
         }).AllowAnonymous();
 
         group.MapGet("GetAds", async (AdBoardsContext context) =>
         {
-            var ads = await context.Ads.Include(x => x.Person).Include(x => x.Complaints).ToListAsync();
+            var ads = await context.Ads
+                .Include(x => x.Complaints)
+                .Include(x => x.Category)
+                .Include(x => x.Person)
+                .Include(x => x.AdType)
+                .ToListAsync();
             return Results.Ok(ads);
         }).AllowAnonymous();
 
         group.MapGet("GetMyAds", async (AdBoardsContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
-            var ads = await context.Ads.Where(x => x.PersonId == userId).ToListAsync();
+            var ads = await context.Ads
+                .Include(x => x.Complaints)
+                .Include(x => x.Category)
+                .Include(x => x.Person)
+                .Include(x => x.AdType)
+                .Where(x => x.PersonId == userId)
+                .ToListAsync();
 
             return Results.Ok(ads);
         });
@@ -37,7 +53,10 @@ public static class AdEndpoints
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
             var ads = await context.Favorites
+                .Include(x => x.Ad).ThenInclude(x => x.Complaints)
+                .Include(x => x.Ad).ThenInclude(x => x.Category)
                 .Include(x => x.Ad).ThenInclude(x => x.Person)
+                .Include(x => x.Ad).ThenInclude(x => x.AdType)
                 .Where(x => x.PersonId == userId)
                 .Select(x => x.Ad)
                 .ToListAsync();
@@ -45,7 +64,7 @@ public static class AdEndpoints
             return Results.Ok(ads);
         });
 
-        group.MapPost("Addition", async (AdModel model, AdBoardsContext context, ClaimsPrincipal user,
+        group.MapPost("Addition", async (AddAdModel model, AdBoardsContext context, ClaimsPrincipal user,
             FileManager fileManager) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
@@ -56,9 +75,9 @@ public static class AdEndpoints
                 Description = model.Description,
                 City = model.City,
                 Date = DateOnly.FromDateTime(DateTime.Today),
-                CategoryId = model.CotegorysId,
+                CategoryId = model.CategoryId,
                 PersonId = userId,
-                AdTypeId = model.TypeOfAdId,
+                AdTypeId = model.AdTypeId,
                 PhotoName = await fileManager.SaveAdPhoto(null)
             };
 
@@ -81,7 +100,12 @@ public static class AdEndpoints
             FileManager fileManager, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
-            var ad = await context.Ads.FindAsync(id);
+            var ad = await context.Ads
+                .Include(x => x.Complaints)
+                .Include(x => x.Category)
+                .Include(x => x.Person)
+                .Include(x => x.AdType)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (ad is null) return Results.NotFound();
 
             if (ad.PersonId != userId) return Results.Forbid();
@@ -96,7 +120,12 @@ public static class AdEndpoints
         group.MapPut("Update", async (UpdateAdModel model, AdBoardsContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
-            var ad = await context.Ads.FindAsync(model.Id);
+            var ad = await context.Ads
+                .Include(x => x.Complaints)
+                .Include(x => x.Category)
+                .Include(x => x.Person)
+                .Include(x => x.AdType)
+                .FirstOrDefaultAsync(x => x.Id == model.Id);
             if (ad is null) return Results.NotFound();
 
             if (ad.PersonId != userId) return Results.Forbid();

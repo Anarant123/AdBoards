@@ -1,8 +1,24 @@
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using AdBoards.ApiClient.Contracts.Responses;
+
 namespace AdBoards.ApiClient;
 
 public class AdBoardsApiClient
 {
     internal readonly HttpClient HttpClient;
+
+    private string? _jwt;
+
+    public string? Jwt
+    {
+        get => _jwt;
+        set
+        {
+            _jwt = value;
+            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _jwt);
+        }
+    }
 
     public AdBoardsApiClient(string apiBasePath)
     {
@@ -10,5 +26,6 @@ public class AdBoardsApiClient
         {
             BaseAddress = new Uri(apiBasePath)
         };
+        Jwt = null;
     }
 }

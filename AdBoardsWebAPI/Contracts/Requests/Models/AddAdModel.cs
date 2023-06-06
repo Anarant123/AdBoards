@@ -1,11 +1,11 @@
 namespace AdBoardsWebAPI.Contracts.Requests.Models;
 
-public record AdModel
+public record AddAdModel
 (
     int Price,
     string Name,
     string Description,
     string City,
-    int CotegorysId,
-    int TypeOfAdId
+    int CategoryId,
+    int AdTypeId
 );

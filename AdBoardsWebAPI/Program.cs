@@ -1,7 +1,7 @@
 using System.Text;
+using AdBoards.Domain.Enums;
 using AdBoardsWebAPI.Auth;
 using AdBoardsWebAPI.Data;
-using AdBoardsWebAPI.DomainTypes.Enums;
 using AdBoardsWebAPI.Extensions;
 using AdBoardsWebAPI.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

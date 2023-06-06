@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using AdBoardsWebAPI.DomainTypes.Enums;
+using AdBoards.Domain.Enums;
 
 namespace AdBoardsWebAPI.Data.Models;
 
@@ -9,7 +9,7 @@ public class Person
 
     public string Login { get; set; } = null!;
 
-    public string Password { get; set; } = null!;
+    [JsonIgnore] public string Password { get; set; } = null!;
 
     public string? Name { get; set; }
 
@@ -23,7 +23,7 @@ public class Person
 
     public string PhotoName { get; set; } = null!;
 
-    public RightType RightId { get; set; }
+    [JsonIgnore] public RightType RightId { get; set; }
 
     [JsonIgnore] public ICollection<Ad> Ads { get; set; } = new List<Ad>();
 

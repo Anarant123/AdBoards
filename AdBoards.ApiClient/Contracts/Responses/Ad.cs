@@ -14,23 +14,21 @@ public class Ad
 
     public string City { get; set; } = null!;
 
-    [JsonPropertyName("photo")] public string PhotoUri { get; set; } = null!;
+    private string _photoName = null!;
+
+    public string PhotoName
+    {
+        get => "https://adboards.site/" + _photoName;
+        set => _photoName = value;
+    }
 
     public DateOnly Date { get; set; }
 
-    [JsonPropertyName("cotegorysId")] public int CategoryId { get; set; }
+    public IEnumerable<Complaint> Complaints { get; set; } = Enumerable.Empty<Complaint>();
 
-    public int PersonId { get; set; }
-
-    [JsonPropertyName("typeOfAdId")] public int TypeOfAdId { get; set; }
-
-    public ICollection<Complaint> Complaints { get; set; } = new List<Complaint>();
-
-    [JsonPropertyName("cotegorys")] public Category Category { get; set; } = null!;
-
-    public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+    public Category Category { get; set; } = null!;
 
     public Person Person { get; set; } = null!;
 
-    [JsonPropertyName("typeOfAd")] public AdType AdType { get; set; } = null!;
+    public AdType AdType { get; set; } = null!;
 }

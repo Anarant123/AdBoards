@@ -1,4 +1,4 @@
-namespace AdBoardsWebAPI.DomainTypes.Enums;
+namespace AdBoards.Domain.Enums;
 
 public enum RightType
 {
