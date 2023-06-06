@@ -11,9 +11,16 @@ public static class PeopleExtensions
     public static async Task<AuthorizedModel?> Authorize(this AdBoardsApiClient api, string login, string password)
     {
         using var response = await api.HttpClient.GetAsync($"People/Authorization?login={login}&password={password}");
-        var model = await response.Content.ReadFromJsonAsync<AuthorizedModel>();
 
-        return model;
+        try
+        {
+            var model = await response.Content.ReadFromJsonAsync<AuthorizedModel>();
+            return model;
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public static async Task<bool> Registr(this AdBoardsApiClient api, PersonReg person)

@@ -1,16 +1,26 @@
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
+
+
 namespace AdBoards.ApiClient.Contracts.Requests;
 
 public class AddAdModel
 {
-    public decimal Price { get; set; }
+    public int Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public int Price { get; set; }
+
+    public string? Name { get; set; }
 
     public string Description { get; set; } = null!;
 
     public string City { get; set; } = null!;
 
-    public string CategoryId { get; set; } = null!;
+    public int CategoryId { get; set; }
 
-    public string AdTypeId { get; set; } = null!;
+    public int AdTypeId { get; set; }
+
+    public string? PhotoName { get; set; }
+
+    [JsonIgnore] public IFormFile? Photo { get; set; }
 }
