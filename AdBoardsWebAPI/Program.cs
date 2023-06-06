@@ -40,17 +40,18 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(Policies.NormalUser, pb =>
     {
-        var policy = pb.RequireAuthenticatedUser()
-            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-            .Build();
-        options.DefaultPolicy = policy;
+        pb.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+        pb.RequireAuthenticatedUser();
     });
     options.AddPolicy(Policies.Admin, pb =>
     {
-        pb.RequireAuthenticatedUser()
-            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-            .RequireClaim("rightId", RightType.Admin.ToString());
+        pb.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+        pb.RequireAuthenticatedUser();
+        pb.RequireClaim("rightId", RightType.Admin.ToString());
     });
+
+    options.DefaultPolicy = options.GetPolicy(Policies.NormalUser)!;
+    options.FallbackPolicy = options.GetPolicy(Policies.NormalUser)!;
 });
 
 builder.Services.AddEndpointsApiExplorer();

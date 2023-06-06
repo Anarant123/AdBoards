@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using AdBoardsWebAPI.Auth;
 using AdBoardsWebAPI.Data;
 using AdBoardsWebAPI.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -10,15 +12,17 @@ public static class ComplaintEndpoints
     {
         var group = app.MapGroup("Complaint/");
 
-        group.MapPost("Addition", async (int adId, int personId, AdBoardsContext context) =>
+        group.MapPost("Addition", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
         {
-            if (await context.Complaints.AnyAsync(x => x.AdId == adId && x.PersonId == personId))
+            var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
+
+            if (await context.Complaints.AnyAsync(x => x.AdId == adId && x.PersonId == userId))
                 return Results.BadRequest();
 
             var c = new Complaint
             {
                 AdId = adId,
-                PersonId = personId
+                PersonId = userId
             };
 
             context.Complaints.Add(c);
@@ -36,7 +40,7 @@ public static class ComplaintEndpoints
             await context.SaveChangesAsync();
 
             return Results.Ok();
-        });
+        }).RequireAuthorization(Policies.Admin);
 
         return app;
     }
