@@ -18,7 +18,7 @@ namespace AdBoardsWebAPI.Extensions;
 
 public static class PeopleEndpoints
 {
-    public static WebApplication MapPeopleEndpoints(this WebApplication app)
+    public static IEndpointRouteBuilder MapPeopleEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("People").WithTags("People");
 

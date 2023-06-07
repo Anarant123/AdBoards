@@ -123,10 +123,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // Mapping.
-app.MapAdEndpoints();
-app.MapComplaintEndpoints();
-app.MapFavoritesEndpoints();
-app.MapPeopleEndpoints();
+var api = app.MapGroup("api/");
+
+api.MapAdEndpoints();
+api.MapComplaintEndpoints();
+api.MapFavoritesEndpoints();
+api.MapPeopleEndpoints();
 
 // Starting the app.
 app.Run();

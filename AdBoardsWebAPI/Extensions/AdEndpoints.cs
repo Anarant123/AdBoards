@@ -10,7 +10,7 @@ namespace AdBoardsWebAPI.Extensions;
 
 public static class AdEndpoints
 {
-    public static WebApplication MapAdEndpoints(this WebApplication app)
+    public static IEndpointRouteBuilder MapAdEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("Ads/").WithTags("Ads");
 

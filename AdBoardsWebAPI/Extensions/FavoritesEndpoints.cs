@@ -7,7 +7,7 @@ namespace AdBoardsWebAPI.Extensions;
 
 public static class FavoritesEndpoints
 {
-    public static WebApplication MapFavoritesEndpoints(this WebApplication app)
+    public static IEndpointRouteBuilder MapFavoritesEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("Favorites").WithTags("Favorites");
         ;

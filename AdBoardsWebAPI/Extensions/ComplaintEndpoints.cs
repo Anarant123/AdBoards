@@ -8,7 +8,7 @@ namespace AdBoardsWebAPI.Extensions;
 
 public static class ComplaintEndpoints
 {
-    public static WebApplication MapComplaintEndpoints(this WebApplication app)
+    public static IEndpointRouteBuilder MapComplaintEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("Complaint/").WithTags("Complaint");
 
