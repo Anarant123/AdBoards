@@ -41,4 +41,9 @@ public class Ad
     {
         get => AdType.Name;
     }
+
+    public int getComplaints
+    {
+        get => Complaints.Count();
+    }
 }
