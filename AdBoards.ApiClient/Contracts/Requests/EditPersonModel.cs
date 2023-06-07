@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using System.Text.Json.Serialization;
+using AdBoards.ApiClient.Contracts.Responses;
 
 namespace AdBoards.ApiClient.Contracts.Requests;
 
@@ -7,20 +8,28 @@ public class EditPersonModel
 {
     public string? Name { get; set; }
 
-    public string? City { get; set; }
+    public string Phone { get; set; } = string.Empty;
+
+    public string Email { get; set; } = string.Empty;
 
     public DateTime Birthday { get; set; }
 
-    public string Phone { get; set; } = null!;
+    public string? City { get; set; }
 
-    public string Email { get; set; } = null!;
+    [JsonIgnore] public string PhotoName { get; set; } = string.Empty;
 
-    private string _photoName = null!;
-
-    public string PhotoName
-    {
-        get => $"https://adboards.site/{_photoName}";
-        set => _photoName = value;
-    }
     [JsonIgnore] public IFormFile? Photo { get; set; }
+
+    public static EditPersonModel MapFromPerson(Person person)
+    {
+        return new EditPersonModel
+        {
+            Name = person.Name,
+            Phone = person.Phone,
+            Email = person.Email,
+            Birthday = person.Birthday,
+            City = person.City,
+            PhotoName = person.PhotoName
+        };
+    }
 }

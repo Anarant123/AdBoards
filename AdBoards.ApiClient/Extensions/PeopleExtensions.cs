@@ -28,7 +28,7 @@ public static class PeopleExtensions
         if (person.Password != person.ConfirmPassword) return false;
 
         using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
-        using var response = await api.HttpClient.PostAsync($"People/Registration", jsonContent);
+        using var response = await api.HttpClient.PostAsync("People/Registration", jsonContent);
 
         return response.IsSuccessStatusCode;
     }
@@ -47,9 +47,8 @@ public static class PeopleExtensions
 
     public static async Task<Person?> PersonUpdate(this AdBoardsApiClient api, EditPersonModel person)
     {
-
         using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
-        using var response = await api.HttpClient.PutAsync($"People/Update", jsonContent);
+        using var response = await api.HttpClient.PutAsync("People/Update", jsonContent);
 
         try
         {
@@ -72,11 +71,10 @@ public static class PeopleExtensions
             { new StreamContent(stream), "photo", model.Photo.FileName }
         };
 
-        using var response = await apiClient.HttpClient.PutAsync($"People/Photo", multipart);
+        using var response = await apiClient.HttpClient.PutAsync("People/Photo", multipart);
 
         if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<Person>();
 
         return null;
     }
-
 }

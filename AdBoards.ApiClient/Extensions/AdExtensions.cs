@@ -62,7 +62,7 @@ public static class AdExtensions
     {
 
         using var jsonContent = new StringContent(JsonSerializer.Serialize(ad), Encoding.UTF8, "application/json");
-        using var response = await api.HttpClient.PutAsync($"Ads/Update", jsonContent);
+        using var response = await api.HttpClient.PutAsync("Ads/Update", jsonContent);
 
         try
         {

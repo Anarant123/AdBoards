@@ -12,9 +12,9 @@ public class AddAdModel
 
     public string? Name { get; set; }
 
-    public string Description { get; set; } = null!;
+    public string Description { get; set; } = string.Empty;
 
-    public string City { get; set; } = null!;
+    public string City { get; set; } = string.Empty;
 
     public int CategoryId { get; set; }
 

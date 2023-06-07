@@ -7,6 +7,6 @@ public record UpdateAdModel
     string? Name,
     string? Description,
     string? City,
-    int? CotegorysId,
-    int? TypeOfAdId
+    int? CategoryId,
+    int? AdTypeId
 );

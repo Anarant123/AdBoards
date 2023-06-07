@@ -146,8 +146,8 @@ public static class AdEndpoints
             if (model.Name is not null) ad.Name = model.Name;
             if (model.Description is not null) ad.Description = model.Description;
             if (model.City is not null) ad.City = model.City;
-            if (model.CotegorysId is not null) ad.CategoryId = model.CotegorysId.Value;
-            if (model.TypeOfAdId is not null) ad.AdTypeId = model.TypeOfAdId.Value;
+            if (model.CategoryId is not null) ad.CategoryId = model.CategoryId.Value;
+            if (model.AdTypeId is not null) ad.AdTypeId = model.AdTypeId.Value;
 
             try
             {
