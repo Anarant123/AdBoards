@@ -1,8 +1,8 @@
-using AdBoards.ApiClient.Contracts.Requests;
-using AdBoards.ApiClient.Contracts.Responses;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using AdBoards.ApiClient.Contracts.Requests;
+using AdBoards.ApiClient.Contracts.Responses;
 
 namespace AdBoards.ApiClient.Extensions;
 
@@ -40,7 +40,7 @@ public static class AdExtensions
 
         return null;
     }
-    
+
     public static async Task<Ad?> AddAd(this AdBoardsApiClient apiClient, AddAdModel model)
     {
         using var jsonContent = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8, "application/json");
@@ -60,7 +60,6 @@ public static class AdExtensions
 
     public static async Task<Ad?> AdUpdate(this AdBoardsApiClient api, AddAdModel ad)
     {
-
         using var jsonContent = new StringContent(JsonSerializer.Serialize(ad), Encoding.UTF8, "application/json");
         using var response = await api.HttpClient.PutAsync("Ads/Update", jsonContent);
 
@@ -92,10 +91,11 @@ public static class AdExtensions
         return null;
     }
 
-    public static async Task<List<Ad>?> UseFulter(this AdBoardsApiClient apiClient, int type, string priceFrom, string priceUpTo, string city, int categoryId, bool rbBuy, bool rbSell)
+    public static async Task<List<Ad>> UseFulter(this AdBoardsApiClient apiClient, int type, string? priceFrom,
+        string? priceUpTo, string? city, int categoryId, bool rbBuy, bool rbSell)
     {
         var ads = new List<Ad>();
-        switch(type)
+        switch (type)
         {
             case 1:
                 ads = await apiClient.GetAds();
@@ -123,6 +123,4 @@ public static class AdExtensions
 
         return ads;
     }
-
-
 }

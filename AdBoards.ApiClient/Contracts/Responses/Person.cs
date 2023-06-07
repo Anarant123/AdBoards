@@ -2,6 +2,7 @@
 
 public class Person
 {
+    private string _photoName = null!;
     public int Id { get; set; }
 
     public string Login { get; set; } = null!;
@@ -15,8 +16,6 @@ public class Person
     public string Phone { get; set; } = null!;
 
     public string Email { get; set; } = null!;
-
-    private string _photoName = null!;
 
     public string PhotoName
     {

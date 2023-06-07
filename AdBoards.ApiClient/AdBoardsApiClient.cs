@@ -8,6 +8,15 @@ public class AdBoardsApiClient
 
     private string? _jwt;
 
+    public AdBoardsApiClient(string apiBasePath)
+    {
+        HttpClient = new HttpClient
+        {
+            BaseAddress = new Uri(apiBasePath)
+        };
+        Jwt = null;
+    }
+
     public string? Jwt
     {
         get => _jwt;
@@ -16,14 +25,5 @@ public class AdBoardsApiClient
             _jwt = value;
             HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _jwt);
         }
-    }
-
-    public AdBoardsApiClient(string apiBasePath)
-    {
-        HttpClient = new HttpClient
-        {
-            BaseAddress = new Uri(apiBasePath)
-        };
-        Jwt = null;
     }
 }

@@ -71,7 +71,7 @@ public static class PeopleExtensions
             { new StreamContent(stream), "photo", model.Photo.FileName }
         };
 
-        using var response = await api.HttpClient.PutAsync($"People/Photo", multipart);
+        using var response = await api.HttpClient.PutAsync("People/Photo", multipart);
 
         if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<Person>();
 
@@ -80,7 +80,7 @@ public static class PeopleExtensions
 
     public static async Task<int> GetCountOfClient(this AdBoardsApiClient api)
     {
-        using var response = await api.HttpClient.GetAsync($"People/GetCountOfClient");
+        using var response = await api.HttpClient.GetAsync("People/GetCountOfClient");
 
         var count = Convert.ToInt32(await response.Content.ReadAsStringAsync());
         return count;
@@ -97,5 +97,4 @@ public static class PeopleExtensions
         using var response = await api.HttpClient.DeleteAsync($"People/Delete?login={login}");
         return response.IsSuccessStatusCode;
     }
-
 }

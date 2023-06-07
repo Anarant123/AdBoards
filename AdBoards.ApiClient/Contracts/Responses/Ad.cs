@@ -2,6 +2,7 @@
 
 public class Ad
 {
+    private string _photoName = null!;
     public int Id { get; set; }
 
     public int Price { get; set; }
@@ -11,8 +12,6 @@ public class Ad
     public string Description { get; set; } = null!;
 
     public string City { get; set; } = null!;
-
-    private string _photoName = null!;
 
     public string PhotoName
     {
@@ -32,18 +31,9 @@ public class Ad
 
     public AdType AdType { get; set; } = null!;
 
-    public string getPrice
-    {
-        get => Price + " ₽";
-    }
+    public string getPrice => Price + " ₽";
 
-    public string getType
-    {
-        get => AdType.Name;
-    }
+    public string getType => AdType.Name;
 
-    public int getComplaints
-    {
-        get => Complaints.Count();
-    }
+    public int getComplaints => Complaints.Count();
 }

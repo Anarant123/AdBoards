@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Http;
 using System.Text.Json.Serialization;
 using AdBoards.ApiClient.Contracts.Responses;
+using Microsoft.AspNetCore.Http;
 
 namespace AdBoards.ApiClient.Contracts.Requests;
 
