@@ -10,7 +10,6 @@ public static class FavoritesEndpoints
     public static IEndpointRouteBuilder MapFavoritesEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("Favorites").WithTags("Favorites");
-        ;
 
         group.MapGet("IsFavorite", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
         {

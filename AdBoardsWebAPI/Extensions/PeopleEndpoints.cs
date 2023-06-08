@@ -4,6 +4,7 @@ using System.Text;
 using AdBoards.Domain.Enums;
 using AdBoardsWebAPI.Auth;
 using AdBoardsWebAPI.Contracts.Requests.Models;
+using AdBoardsWebAPI.Contracts.Responses;
 using AdBoardsWebAPI.Data;
 using AdBoardsWebAPI.Data.Models;
 using AdBoardsWebAPI.Options;
@@ -76,16 +77,49 @@ public static class PeopleEndpoints
         {
             var p = new Person
             {
-                Login = model.Login,
+                Login = model.Login.Trim(),
                 Password = model.Password,
-                Name = model.Name,
-                City = model.City,
+                Name = model.Name?.Trim(),
+                City = model.City?.Trim(),
                 Birthday = DateOnly.FromDateTime(model.Birthday),
-                Phone = model.Phone,
-                Email = model.Email,
+                Phone = model.Phone.Trim(),
+                Email = model.Email.Trim(),
                 RightId = RightType.Normal,
                 PhotoName = await fileManager.SaveUserPhoto(null)
             };
+
+            var errors = new List<Error>(3);
+
+            if (await context.People.AnyAsync(x => x.Login == p.Login))
+            {
+                errors.Add(new Error
+                {
+                    Reason = "login_unique",
+                    Message = "Указанный логин уже занят"
+                });
+            }
+
+            if (await context.People.AnyAsync(x => x.Email == p.Email))
+            {
+                errors.Add(new Error
+                {
+                    Reason = "email_unique",
+                    Message = "Указанный email уже занят"
+                });
+            }
+
+            var minDate = DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-150));
+            var maxDate = DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-14));
+            if (p.Birthday < minDate || p.Birthday > maxDate)
+            {
+                errors.Add(new Error
+                {
+                    Reason = "birthday_min_max",
+                    Message = "Возраст должен быть от 14 до 150 лет"
+                });
+            }
+
+            if (errors.Count != 0) return Results.BadRequest(errors);
 
             context.People.Add(p);
 
@@ -96,7 +130,7 @@ public static class PeopleEndpoints
             catch (DbUpdateException e)
             {
                 Console.WriteLine(e);
-                return Results.Conflict();
+                return Results.BadRequest();
             }
 
             return Results.Ok(p);

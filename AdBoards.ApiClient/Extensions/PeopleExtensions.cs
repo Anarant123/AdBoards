@@ -12,25 +12,19 @@ public static class PeopleExtensions
     {
         using var response = await api.HttpClient.GetAsync($"People/Authorization?login={login}&password={password}");
 
-        try
-        {
-            var model = await response.Content.ReadFromJsonAsync<AuthorizedModel>();
-            return model;
-        }
-        catch
-        {
-            return null;
-        }
+        return response.IsSuccessStatusCode
+            ? await response.Content.ReadFromJsonAsync<AuthorizedModel>()
+            : null;
     }
 
-    public static async Task<bool> Registr(this AdBoardsApiClient api, PersonReg person)
+    public static async Task<IEnumerable<Error>> Registr(this AdBoardsApiClient api, PersonReg person)
     {
-        if (person.Password != person.ConfirmPassword) return false;
-
         using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
         using var response = await api.HttpClient.PostAsync("People/Registration", jsonContent);
 
-        return response.IsSuccessStatusCode;
+        return response.IsSuccessStatusCode
+            ? Enumerable.Empty<Error>()
+            : (await response.Content.ReadFromJsonAsync<List<Error>>())!;
     }
 
     public static async Task Recover(this AdBoardsApiClient api, string login)
@@ -50,15 +44,9 @@ public static class PeopleExtensions
         using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
         using var response = await api.HttpClient.PutAsync("People/Update", jsonContent);
 
-        try
-        {
-            var model = await response.Content.ReadFromJsonAsync<Person>();
-            return model;
-        }
-        catch
-        {
-            return null;
-        }
+        return response.IsSuccessStatusCode
+            ? await response.Content.ReadFromJsonAsync<Person>()
+            : null;
     }
 
     public static async Task<Person?> UpdatePersonPhoto(this AdBoardsApiClient api, EditPersonModel model)
