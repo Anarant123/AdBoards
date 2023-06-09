@@ -9,6 +9,7 @@ using AdBoardsWebAPI.Data;
 using AdBoardsWebAPI.Data.Models;
 using AdBoardsWebAPI.Options;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +20,37 @@ namespace AdBoardsWebAPI.Extensions;
 
 public static class PeopleEndpoints
 {
+    private static Error? ValidateBirthday(DateOnly birthday)
+    {
+        var minDate = DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-150));
+        var maxDate = DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-14));
+
+        if (birthday < minDate || birthday > maxDate)
+        {
+            return new Error
+            {
+                Reason = "birthday_min_max",
+                Message = "Возраст должен быть от 14 до 150 лет"
+            };
+        }
+
+        return null;
+    }
+
+    private static async Task<Error?> ValidateEmail(string email, AdBoardsContext context)
+    {
+        if (await context.People.AnyAsync(x => x.Email == email))
+        {
+            return new Error
+            {
+                Reason = "email_unique",
+                Message = "Указанный email уже занят"
+            };
+        }
+
+        return null;
+    }
+
     public static IEndpointRouteBuilder MapPeopleEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("People").WithTags("People");
@@ -99,25 +131,11 @@ public static class PeopleEndpoints
                 });
             }
 
-            if (await context.People.AnyAsync(x => x.Email == p.Email))
-            {
-                errors.Add(new Error
-                {
-                    Reason = "email_unique",
-                    Message = "Указанный email уже занят"
-                });
-            }
+            var emailValidationResult = await ValidateEmail(p.Email, context);
+            if (emailValidationResult is not null) errors.Add(emailValidationResult);
 
-            var minDate = DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-150));
-            var maxDate = DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-14));
-            if (p.Birthday < minDate || p.Birthday > maxDate)
-            {
-                errors.Add(new Error
-                {
-                    Reason = "birthday_min_max",
-                    Message = "Возраст должен быть от 14 до 150 лет"
-                });
-            }
+            var birthdayValidationResult = ValidateBirthday(p.Birthday);
+            if (birthdayValidationResult is not null) errors.Add(birthdayValidationResult);
 
             if (errors.Count != 0) return Results.BadRequest(errors);
 
@@ -178,12 +196,22 @@ public static class PeopleEndpoints
             var person = await context.People.Include(x => x.Right).FirstOrDefaultAsync(x => x.Id == id);
             if (person is null) return Results.NotFound();
 
-            person.Name = model.Name;
-            person.City = model.City;
+            var errors = new List<Error>(3);
+            var emailChanged = person.Email != model.Email?.Trim();
 
+            person.Name = model.Name?.Trim();
+            person.City = model.City?.Trim();
             if (model.Birthday is not null) person.Birthday = DateOnly.FromDateTime(model.Birthday.Value);
-            if (model.Phone is not null) person.Phone = model.Phone;
-            if (model.Email is not null) person.Email = model.Email;
+            if (model.Phone is not null) person.Phone = model.Phone.Trim();
+            if (model.Email is not null) person.Email = model.Email.Trim();
+
+            var emailValidationResult = await ValidateEmail(person.Email, context);
+            if (emailValidationResult is not null && emailChanged) errors.Add(emailValidationResult);
+
+            var birthdayValidationResult = ValidateBirthday(person.Birthday);
+            if (birthdayValidationResult is not null) errors.Add(birthdayValidationResult);
+
+            if (errors.Count != 0) return Results.BadRequest(errors);
 
             try
             {
@@ -192,7 +220,7 @@ public static class PeopleEndpoints
             catch (DbUpdateException e)
             {
                 Console.WriteLine(e);
-                return Results.Conflict();
+                return Results.BadRequest();
             }
 
             return Results.Ok(person);

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoards.ApiClient", "AdBoa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoards.Domain", "AdBoards.Domain\AdBoards.Domain.csproj", "{0360CD04-00D3-4558-84E2-EBCE4C1D288D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional", "Functional\Functional.csproj", "{D2538805-DE95-4E92-A501-E2EF5EB34146}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0360CD04-00D3-4558-84E2-EBCE4C1D288D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0360CD04-00D3-4558-84E2-EBCE4C1D288D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0360CD04-00D3-4558-84E2-EBCE4C1D288D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2538805-DE95-4E92-A501-E2EF5EB34146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2538805-DE95-4E92-A501-E2EF5EB34146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2538805-DE95-4E92-A501-E2EF5EB34146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2538805-DE95-4E92-A501-E2EF5EB34146}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
