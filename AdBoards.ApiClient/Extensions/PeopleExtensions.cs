@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using AdBoards.ApiClient.Contracts.Requests;
 using AdBoards.ApiClient.Contracts.Responses;
+using Functional;
 
 namespace AdBoards.ApiClient.Extensions;
 
@@ -39,14 +40,15 @@ public static class PeopleExtensions
         return await response.Content.ReadFromJsonAsync<Person>();
     }
 
-    public static async Task<Person?> PersonUpdate(this AdBoardsApiClient api, EditPersonModel person)
+    public static async Task<Result<Person, IEnumerable<Error>>> PersonUpdate(this AdBoardsApiClient api,
+        EditPersonModel person)
     {
         using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
         using var response = await api.HttpClient.PutAsync("People/Update", jsonContent);
 
         return response.IsSuccessStatusCode
-            ? await response.Content.ReadFromJsonAsync<Person>()
-            : null;
+            ? new Ok<Person>((await response.Content.ReadFromJsonAsync<Person>())!)
+            : new Error<IEnumerable<Error>>((await response.Content.ReadFromJsonAsync<List<Error>>())!);
     }
 
     public static async Task<Person?> UpdatePersonPhoto(this AdBoardsApiClient api, EditPersonModel model)
