@@ -3,9 +3,9 @@ using AdBoards.Domain.Enums;
 
 namespace AdBoardsWebAPI.Data.Models;
 
-public class Right
+public class Role
 {
-    public RightType Id { get; set; }
+    public RoleType Id { get; set; }
 
     public string Name { get; set; } = null!;
 

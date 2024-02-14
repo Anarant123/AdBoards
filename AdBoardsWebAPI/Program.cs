@@ -37,6 +37,7 @@ builder.Services
             ValidateIssuerSigningKey = true
         };
     });
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(Policies.NormalUser, pb =>
@@ -48,7 +49,7 @@ builder.Services.AddAuthorization(options =>
     {
         pb.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
         pb.RequireAuthenticatedUser();
-        pb.RequireClaim("rightId", RightType.Admin.ToString());
+        pb.RequireClaim("rightId", RoleType.Admin.ToString());
     });
 
     options.DefaultPolicy = options.GetPolicy(Policies.NormalUser)!;
@@ -122,13 +123,16 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Mapping.
 var api = app.MapGroup("api/");
 
 api.MapAdEndpoints();
 api.MapComplaintEndpoints();
 api.MapFavoritesEndpoints();
 api.MapPeopleEndpoints();
+
+using var scope = app.Services.CreateScope();
+using var context = scope.ServiceProvider.GetRequiredService<AdBoardsContext>();
+await context.Database.EnsureCreatedAsync();
 
 // Starting the app.
 app.Run();

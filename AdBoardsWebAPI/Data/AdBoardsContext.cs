@@ -16,6 +16,8 @@ public class AdBoardsContext : DbContext
     {
     }
 
+
+
     public virtual DbSet<Ad> Ads { get; set; }
 
     public virtual DbSet<AdType> AdTypes { get; set; }
@@ -28,7 +30,7 @@ public class AdBoardsContext : DbContext
 
     public virtual DbSet<Person> People { get; set; }
 
-    public virtual DbSet<Right> Rights { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -179,21 +181,21 @@ public class AdBoardsContext : DbContext
             entity.Property(e => e.PhotoName)
                 .HasMaxLength(64)
                 .HasColumnName("photo_name");
-            entity.Property(e => e.RightId).HasColumnName("right_id");
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
 
-            entity.HasOne(d => d.Right).WithMany(p => p.People)
-                .HasForeignKey(d => d.RightId)
+            entity.HasOne(d => d.Role).WithMany(p => p.People)
+                .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("person_right_id_fkey");
+                .HasConstraintName("person_role_id_fkey");
         });
 
-        modelBuilder.Entity<Right>(entity =>
+        modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("right_pkey");
+            entity.HasKey(e => e.Id).HasName("role_pkey");
 
-            entity.ToTable("right");
+            entity.ToTable("role");
 
-            entity.HasIndex(e => e.Name, "right_name_key").IsUnique();
+            entity.HasIndex(e => e.Name, "role_name_key").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)

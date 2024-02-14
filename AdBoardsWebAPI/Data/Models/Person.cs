@@ -23,7 +23,7 @@ public class Person
 
     public string PhotoName { get; set; } = null!;
 
-    [JsonIgnore] public RightType RightId { get; set; }
+    [JsonIgnore] public RoleType RoleId { get; set; }
 
     [JsonIgnore] public ICollection<Ad> Ads { get; set; } = new List<Ad>();
 
@@ -31,5 +31,5 @@ public class Person
 
     [JsonIgnore] public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
 
-    public Right Right { get; set; } = null!;
+    public Role Role { get; set; } = null!;
 }

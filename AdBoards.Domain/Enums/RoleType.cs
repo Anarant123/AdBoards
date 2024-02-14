@@ -1,6 +1,6 @@
 namespace AdBoards.Domain.Enums;
 
-public enum RightType
+public enum RoleType
 {
     Admin = 1,
     Normal = 2

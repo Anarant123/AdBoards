@@ -14,7 +14,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\AdBoards.Domain\AdBoards.Domain.csproj" />
-        <ProjectReference Include="..\Functional\Functional.csproj" />
     </ItemGroup>
 
 </Project>

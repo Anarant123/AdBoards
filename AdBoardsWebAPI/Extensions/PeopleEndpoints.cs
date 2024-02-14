@@ -57,14 +57,14 @@ public static class PeopleEndpoints
 
         group.MapGet("GetPeople", async (AdBoardsContext context) =>
         {
-            var people = await context.People.Include(x => x.Right).ToListAsync();
+            var people = await context.People.Include(x => x.Role).ToListAsync();
             return people.Count == 0 ? Results.NotFound() : Results.Ok(people);
         }).RequireAuthorization(Policies.Admin);
 
         group.MapGet("GetMe", async (AdBoardsContext context, ClaimsPrincipal user) =>
         {
             var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
-            return await context.People.Include(x => x.Right).FirstOrDefaultAsync(x => x.Id == id);
+            return await context.People.Include(x => x.Role).FirstOrDefaultAsync(x => x.Id == id);
         });
 
         group.MapGet("GetCountOfClient", async (AdBoardsContext context) =>
@@ -77,7 +77,7 @@ public static class PeopleEndpoints
             IOptions<JwtOptions> jwtOptions) =>
         {
             var person = await context.People
-                .Include(x => x.Right)
+                .Include(x => x.Role)
                 .FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
             if (person is null) return Results.BadRequest();
 
@@ -90,7 +90,7 @@ public static class PeopleEndpoints
                     new Claim("id", person.Id.ToString()),
                     new Claim("email", person.Email),
                     new Claim("login", person.Login),
-                    new Claim("rightId", person.RightId.ToString())
+                    new Claim("role", person.RoleId.ToString())
                 }, "jwt"),
                 Expires = DateTime.UtcNow.AddDays(7),
                 Issuer = jwtOptions.Value.Issuer,
@@ -116,7 +116,7 @@ public static class PeopleEndpoints
                 Birthday = DateOnly.FromDateTime(model.Birthday),
                 Phone = model.Phone.Trim(),
                 Email = model.Email.Trim(),
-                RightId = RightType.Normal,
+                RoleId = RoleType.Normal,
                 PhotoName = await fileManager.SaveUserPhoto(null)
             };
 
@@ -193,7 +193,7 @@ public static class PeopleEndpoints
         {
             var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
-            var person = await context.People.Include(x => x.Right).FirstOrDefaultAsync(x => x.Id == id);
+            var person = await context.People.Include(x => x.Role).FirstOrDefaultAsync(x => x.Id == id);
             if (person is null) return Results.NotFound();
 
             var errors = new List<Error>(3);
@@ -231,7 +231,7 @@ public static class PeopleEndpoints
         {
             var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
-            var person = await context.People.Include(x => x.Right).FirstOrDefaultAsync(x => x.Id == id);
+            var person = await context.People.Include(x => x.Role).FirstOrDefaultAsync(x => x.Id == id);
             if (person is null) return Results.NotFound();
 
             person.PhotoName = await fileManager.SaveUserPhoto(photo);
