@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\drawable0\icon_edit.png" />
+    <None Remove="Resources\drawable0\icon_favorites.png" />
+    <None Remove="Resources\drawable0\icon_image.png" />
+    <None Remove="Resources\drawable0\icon_image_person.png" />
+    <None Remove="Resources\drawable0\icon_loop.png" />
+    <None Remove="Resources\drawable0\icon_mail.png" />
+    <None Remove="Resources\drawable0\icon_map_location.png" />
+    <None Remove="Resources\drawable0\icon_my_ads.png" />
+    <None Remove="Resources\drawable0\icon_person.png" />
+    <None Remove="Resources\drawable0\icon_phone.png" />
+    <None Remove="Resources\drawable0\icon_plus.png" />
+    <None Remove="Resources\drawable0\icon_price.png" />
+    <None Remove="Resources\drawable\icon_edit.png" />
+    <None Remove="Resources\drawable\icon_favorites.png" />
+    <None Remove="Resources\drawable\icon_image.png" />
+    <None Remove="Resources\drawable\icon_image_person.png" />
+    <None Remove="Resources\drawable\icon_loop.png" />
+    <None Remove="Resources\drawable\icon_mail.png" />
+    <None Remove="Resources\drawable\icon_map_location.png" />
+    <None Remove="Resources\drawable\icon_my_ads.png" />
+    <None Remove="Resources\drawable\icon_person.png" />
+    <None Remove="Resources\drawable\icon_phone.png" />
+    <None Remove="Resources\drawable\icon_plus.png" />
+    <None Remove="Resources\drawable\icon_price.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdBoards.ApiClient\AdBoards.ApiClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\drawable0\icon_edit.png" />
+    <Resource Include="Resources\drawable0\icon_favorites.png" />
+    <Resource Include="Resources\drawable0\icon_image.png" />
+    <Resource Include="Resources\drawable0\icon_image_person.png" />
+    <Resource Include="Resources\drawable0\icon_loop.png" />
+    <Resource Include="Resources\drawable0\icon_mail.png" />
+    <Resource Include="Resources\drawable0\icon_map_location.png" />
+    <Resource Include="Resources\drawable0\icon_my_ads.png" />
+    <Resource Include="Resources\drawable0\icon_person.png" />
+    <Resource Include="Resources\drawable0\icon_phone.png" />
+    <Resource Include="Resources\drawable0\icon_plus.png" />
+    <Resource Include="Resources\drawable0\icon_price.png" />
+    <Resource Include="Resources\drawable\icon_edit.png" />
+    <Resource Include="Resources\drawable\icon_favorites.png" />
+    <Resource Include="Resources\drawable\icon_image.png" />
+    <Resource Include="Resources\drawable\icon_image_person.png" />
+    <Resource Include="Resources\drawable\icon_loop.png" />
+    <Resource Include="Resources\drawable\icon_mail.png" />
+    <Resource Include="Resources\drawable\icon_map_location.png" />
+    <Resource Include="Resources\drawable\icon_my_ads.png" />
+    <Resource Include="Resources\drawable\icon_person.png" />
+    <Resource Include="Resources\drawable\icon_phone.png" />
+    <Resource Include="Resources\drawable\icon_plus.png" />
+    <Resource Include="Resources\drawable\icon_price.png" />
+  </ItemGroup>
+
+</Project>

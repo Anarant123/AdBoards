@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoardsWebAPI", "AdBoardsWebAPI\AdBoardsWebAPI.csproj", "{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoards.ApiClient", "AdBoards.ApiClient\AdBoards.ApiClient.csproj", "{19E92F3E-5272-42C0-AD08-7B764126572D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoardsWeb", "..\AdBoardsWeb\AdBoardsWeb\AdBoardsWeb.csproj", "{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoards.Domain", "AdBoards.Domain\AdBoards.Domain.csproj", "{0360CD04-00D3-4558-84E2-EBCE4C1D288D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoards.ApiClient", "AdBoards.ApiClient\AdBoards.ApiClient.csproj", "{19E92F3E-5272-42C0-AD08-7B764126572D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functional", "Functional\Functional.csproj", "{D2538805-DE95-4E92-A501-E2EF5EB34146}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdBoards.Domain", "AdBoards.Domain\AdBoards.Domain.csproj", "{0360CD04-00D3-4558-84E2-EBCE4C1D288D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoards.WebAPI", "AdBoards.WebAPI\AdBoards.WebAPI.csproj", "{8DDFD535-BB9D-4850-B4DF-5AA02D976A4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional", "Functional\Functional.csproj", "{D2538805-DE95-4E92-A501-E2EF5EB34146}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdBoards.Desktop", "AdBoards.Desktop\AdBoards.Desktop.csproj", "{7CDCC592-ED10-4E72-BF0C-88A2F4160419}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF1348D1-270E-46BE-AF53-A6B7A8E4B14A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24FB43C1-41FE-48F0-A976-43A9F7ADE90B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19E92F3E-5272-42C0-AD08-7B764126572D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19E92F3E-5272-42C0-AD08-7B764126572D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19E92F3E-5272-42C0-AD08-7B764126572D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +31,14 @@ Global
 		{D2538805-DE95-4E92-A501-E2EF5EB34146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2538805-DE95-4E92-A501-E2EF5EB34146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2538805-DE95-4E92-A501-E2EF5EB34146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DDFD535-BB9D-4850-B4DF-5AA02D976A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDFD535-BB9D-4850-B4DF-5AA02D976A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDFD535-BB9D-4850-B4DF-5AA02D976A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDFD535-BB9D-4850-B4DF-5AA02D976A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CDCC592-ED10-4E72-BF0C-88A2F4160419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CDCC592-ED10-4E72-BF0C-88A2F4160419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CDCC592-ED10-4E72-BF0C-88A2F4160419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CDCC592-ED10-4E72-BF0C-88A2F4160419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

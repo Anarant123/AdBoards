@@ -1,0 +1,117 @@
+﻿<Page x:Class="AdBoardsDesktop.Views.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdBoardsDesktop.Views"
+      mc:Ignorable="d" 
+      
+      Title="ProfilePage">
+
+    <Page.Resources>
+        <Style TargetType="Border">
+            <Setter Property="Background"
+                    Value="White"/>
+            <Setter Property="Margin"
+                    Value="10 10 10 10"/>
+            <Setter Property="CornerRadius"
+                    Value="10"/>
+            <Setter Property="Padding"
+                    Value="20 10 20 0"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black"
+                                  ShadowDepth="1" 
+                                  Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <DockPanel LastChildFill="True"
+               HorizontalAlignment="Center">
+        <Border DockPanel.Dock="Left"
+                Height="420"
+                VerticalAlignment="Top">
+            <StackPanel HorizontalAlignment="Center">
+                <Image Source="\Resources\drawable\icon_image_person.png" 
+                       x:Name="imgPerson"
+                       Width="330"
+                       Height="330"/>
+                <Separator Opacity="0" Height="20"/>
+                <Button x:Name="btnSetPhoto"
+                        Click="btnSetPhoto_Click"
+                        Content="Установить фото"
+                        FontSize="25"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel HorizontalAlignment="Left"
+                        Margin="30 10 30 10" Width="700"
+                        DockPanel.Dock="Right">
+            <StackPanel Width="633">
+                <TextBlock Text="Никнейм:" FontSize="16"/>
+                <TextBox x:Name="tbNickName"
+                             MaxLength="32"
+                             Width="633"
+                             HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Separator Opacity="0" Height="15"/>
+            <StackPanel Width="633">
+                <TextBlock Text="Номер телефона:" FontSize="16"/>
+                <TextBox x:Name="tbPhoneNumber"
+                             MaxLength="16"
+                             Text=""
+                             Width="633"
+                             HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Separator Opacity="0" Height="15"/>
+            <StackPanel Width="633">
+                <TextBlock Text="Почта:" FontSize="16"/>
+                <TextBox x:Name="tbEmail"
+                             MaxLength="99"
+                             Text=""
+                             Width="633"
+                             HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Separator Opacity="0" Height="15"/>
+            <StackPanel Width="633">
+                <TextBlock Text="Дата рождения:" FontSize="16"/>
+                <TextBox x:Name="tbBirthday"
+                         Tag="дд.мм.гггг"
+                         MaxLength="10"
+                         Width="633"
+                         HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Separator Opacity="0" Height="15"/>
+            <StackPanel Width="633">
+                <TextBlock Text="Город:" FontSize="16"/>
+                <TextBox x:Name="tbCityName"
+                             Text=""
+                             Width="633"
+                             MaxLength="30"
+                             HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Separator Opacity="0" Height="15"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnSaveChanges"
+                        Click="btnSaveChanges_Click"
+                        Content="Сохранить изменения" 
+                        Width="300"
+                        FontSize="25"/>
+                <Separator Opacity="0" Width="50"/>
+                <Button x:Name="btnResetInfo"
+                        Click="btnResetInfo_Click"
+                        Content="Сбросить изменения" 
+                        Width="300"
+                        FontSize="25"/>
+            </StackPanel>
+            <Separator Opacity="0" Height="15"/>
+            <Button x:Name="btnExit"
+                        Click="btnExit_Click"
+                        Content="Выйти" 
+                        Width="300"
+                        FontSize="25"/>
+        </StackPanel>
+    </DockPanel>
+</Page>

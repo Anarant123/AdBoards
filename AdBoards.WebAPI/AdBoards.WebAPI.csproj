@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AdBoards.Domain\AdBoards.Domain.csproj" />
+      <ProjectReference Include="..\AdBoards.Domain\AdBoards.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,31 @@
+﻿<Page x:Class="AdBoardsDesktop.Views.StatsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdBoardsDesktop.Views"
+      mc:Ignorable="d" 
+      Background="#FFFFFF"
+      Title="StatsPage">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Margin" Value="10 5 10 5"/>
+        </Style>
+    </Page.Resources>
+    
+    <StackPanel HorizontalAlignment="Center">
+        <TextBlock Text="Статистика" HorizontalAlignment="Center"
+                   FontSize="40" FontWeight="Bold"/>
+        <TextBlock x:Name="lblCountOfClient" Text="Всего пользователей в системе:"/>
+        <TextBlock x:Name="lblCountOfAd" Text="Всего объявлений на площадке:"/>
+        <TextBlock x:Name="lblCountOfC1" Text="Объявлений по продаже недвижимости:"/>
+        <TextBlock x:Name="lblCountOfC2" Text="Объявлений по продаже транспорта:"/>
+        <TextBlock x:Name="lblCountOfC3" Text="Объявлений по продаже личных вещей:"/>
+        <TextBlock x:Name="lblCountOfC4" Text="Объявлений по продаже услуг:"/>
+        <TextBlock x:Name="lblCountOfC5" Text="Объявлений по продаже электроники:"/>
+        <TextBlock x:Name="lblCountOfT1" Text="Объявлений по покупке:"/>
+        <TextBlock x:Name="lblCountOfT2" Text="Объявлений по продаже:"/>
+    </StackPanel>
+</Page>
