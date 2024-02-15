@@ -15,7 +15,7 @@ public class Ad
 
     public string PhotoName
     {
-        get => "https://adboards.site/" + _photoName;
+        get => "http://localhost:5228/" + _photoName;
         set => _photoName = value;
     }
 

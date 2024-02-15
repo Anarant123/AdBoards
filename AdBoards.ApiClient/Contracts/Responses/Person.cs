@@ -19,9 +19,9 @@ public class Person
 
     public string PhotoName
     {
-        get => $"https://adboards.site/{_photoName}";
+        get => $"http://localhost:5228/{_photoName}";
         set => _photoName = value;
     }
 
-    public Right Right { get; set; } = null!;
+    public Role Role { get; set; } = null!;
 }

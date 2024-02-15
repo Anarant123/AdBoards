@@ -57,7 +57,7 @@ namespace AdBoardsDesktop.Views
 
             Context.Api.Jwt = Context.UserNow.Token;
 
-            if (Context.UserNow.Person.Right.Id == 2)
+            if (Context.UserNow.Person.Role.Id == 2)
                 this.NavigationService.Navigate(new Uri("Views/ProfilePage.xaml", UriKind.Relative));
             else
             {

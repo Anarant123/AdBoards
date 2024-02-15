@@ -165,13 +165,13 @@ public static class AdEndpoints
         group.MapDelete("Delete", async (int id, AdBoardsContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
-            var res = Enum.TryParse(user.Claims.First(x => x.Type == "rightId").Value, out RoleType userRightId);
+            var res = Enum.TryParse(user.Claims.First(x => x.Type == "roleId").Value, out RoleType userRoleId);
             if (!res) return Results.BadRequest();
 
             var ad = await context.Ads.FindAsync(id);
             if (ad is null) return Results.NotFound();
 
-            if (userRightId != RoleType.Admin && userId != ad.PersonId) return Results.Forbid();
+            if (userRoleId != RoleType.Admin && userId != ad.PersonId) return Results.Forbid();
 
             context.Ads.Remove(ad);
             await context.SaveChangesAsync();

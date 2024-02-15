@@ -1,6 +1,6 @@
 ﻿namespace AdBoards.ApiClient.Contracts.Responses;
 
-public class Right
+public class Role
 {
     public int Id { get; set; }
 
