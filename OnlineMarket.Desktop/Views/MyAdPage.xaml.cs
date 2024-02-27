@@ -1,7 +1,6 @@
-﻿using AdBoards.ApiClient.Contracts.Requests;
-using AdBoards.ApiClient.Contracts.Responses;
-using AdBoards.ApiClient.Extensions;
-using AdBoardsDesktop.Models.db;
+﻿using OnlineMarket.ApiClient.Contracts.Requests;
+using OnlineMarket.ApiClient.Contracts.Responses;
+using OnlineMarket.ApiClient.Extensions;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Win32;
 using System;
@@ -9,8 +8,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop.Views
+namespace OnlineMarket.Desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для MyAdPage.xaml

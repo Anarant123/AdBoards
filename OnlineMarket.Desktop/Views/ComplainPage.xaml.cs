@@ -1,5 +1,4 @@
-﻿using AdBoardsDesktop.Models.db;
-using AdBoards.ApiClient.Contracts.Responses;
+﻿using OnlineMarket.ApiClient.Contracts.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +6,10 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Controls;
-using AdBoards.ApiClient.Extensions;
+using OnlineMarket.ApiClient.Extensions;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop.Views
+namespace OnlineMarket.Desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для ComplainPage.xaml

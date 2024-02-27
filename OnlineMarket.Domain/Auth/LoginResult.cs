@@ -1,4 +1,4 @@
-namespace AdBoards.Domain.Auth;
+namespace OnlineMarket.Domain.Auth;
 
 public enum LoginResult
 {

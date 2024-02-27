@@ -1,6 +1,5 @@
-﻿using AdBoardsDesktop.Models.db;
-using AdBoards.ApiClient;
-using AdBoards.ApiClient.Extensions;
+﻿using OnlineMarket.ApiClient;
+using OnlineMarket.ApiClient.Extensions;
 using System;
 using System.Net.Http;
 using System.Text.Json;
@@ -8,8 +7,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop.Views
+namespace OnlineMarket.Desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для AuthorizationPage.xaml

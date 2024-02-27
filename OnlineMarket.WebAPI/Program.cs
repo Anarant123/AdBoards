@@ -1,9 +1,9 @@
 using System.Text;
-using AdBoards.Domain.Enums;
-using AdBoardsWebAPI.Auth;
-using AdBoardsWebAPI.Data;
-using AdBoardsWebAPI.Extensions;
-using AdBoardsWebAPI.Options;
+using OnlineMarket.Domain.Enums;
+using OnlineMarket.WebAPI.Auth;
+using OnlineMarket.WebAPI.Data;
+using OnlineMarket.WebAPI.Extensions;
+using OnlineMarket.WebAPI.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -130,9 +130,9 @@ api.MapComplaintEndpoints();
 api.MapFavoritesEndpoints();
 api.MapPeopleEndpoints();
 
-using var scope = app.Services.CreateScope();
-using var context = scope.ServiceProvider.GetRequiredService<OnlineMarketContext>();
-await context.Database.EnsureCreatedAsync();
+// using var scope = app.Services.CreateScope();
+// using var context = scope.ServiceProvider.GetRequiredService<OnlineMarketContext>();
+// await context.Database.EnsureCreatedAsync();
 
 // Starting the app.
 app.Run();

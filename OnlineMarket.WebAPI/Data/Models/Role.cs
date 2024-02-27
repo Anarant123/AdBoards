@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using AdBoards.Domain.Enums;
+using OnlineMarket.Domain.Enums;
 
-namespace AdBoardsWebAPI.Data.Models;
+namespace OnlineMarket.WebAPI.Data.Models;
 
 public class Role
 {

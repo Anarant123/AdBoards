@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace AdBoardsDesktop
+namespace OnlineMarket.Desktop
 {
     /// <summary>
     /// Interaction logic for App.xaml

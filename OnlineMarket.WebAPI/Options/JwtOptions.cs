@@ -1,4 +1,4 @@
-namespace AdBoardsWebAPI.Options;
+namespace OnlineMarket.WebAPI.Options;
 
 public class JwtOptions
 {

@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using AdBoards.ApiClient.Contracts.Responses;
 using Microsoft.AspNetCore.Http;
+using OnlineMarket.ApiClient.Contracts.Responses;
 
-namespace AdBoards.ApiClient.Contracts.Requests;
+namespace OnlineMarket.ApiClient.Contracts.Requests;
 
 public class EditPersonModel
 {

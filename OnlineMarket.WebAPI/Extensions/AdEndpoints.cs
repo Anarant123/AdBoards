@@ -1,12 +1,12 @@
 using System.Security.Claims;
-using AdBoards.Domain.Enums;
-using AdBoardsWebAPI.Contracts.Requests.Models;
-using AdBoardsWebAPI.Contracts.Responses;
-using AdBoardsWebAPI.Data;
-using AdBoardsWebAPI.Data.Models;
+using OnlineMarket.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
+using OnlineMarket.WebAPI.Contracts.Requests.Models;
+using OnlineMarket.WebAPI.Contracts.Responses;
+using OnlineMarket.WebAPI.Data;
+using OnlineMarket.WebAPI.Data.Models;
 
-namespace AdBoardsWebAPI.Extensions;
+namespace OnlineMarket.WebAPI.Extensions;
 
 public static class AdEndpoints
 {

@@ -1,4 +1,4 @@
-namespace AdBoardsWebAPI.Auth;
+namespace OnlineMarket.WebAPI.Auth;
 
 public static class Policies
 {

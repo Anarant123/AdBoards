@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace AdBoardsDesktop
+namespace OnlineMarket.Desktop
 {
     public static class LoadImage
     {

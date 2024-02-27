@@ -1,9 +1,9 @@
 using System.Security.Claims;
-using AdBoardsWebAPI.Data;
-using AdBoardsWebAPI.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using OnlineMarket.WebAPI.Data;
+using OnlineMarket.WebAPI.Data.Models;
 
-namespace AdBoardsWebAPI.Extensions;
+namespace OnlineMarket.WebAPI.Extensions;
 
 public static class FavoritesEndpoints
 {

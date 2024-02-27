@@ -1,6 +1,6 @@
-using AdBoardsWebAPI.Data.Models;
+using OnlineMarket.WebAPI.Data.Models;
 
-namespace AdBoardsWebAPI.Contracts.Responses;
+namespace OnlineMarket.WebAPI.Contracts.Responses;
 
 public class AdDto
 {

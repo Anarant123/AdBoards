@@ -1,13 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using AdBoards.Domain.Enums;
-using AdBoardsWebAPI.Auth;
-using AdBoardsWebAPI.Contracts.Requests.Models;
-using AdBoardsWebAPI.Contracts.Responses;
-using AdBoardsWebAPI.Data;
-using AdBoardsWebAPI.Data.Models;
-using AdBoardsWebAPI.Options;
+using OnlineMarket.Domain.Enums;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -15,8 +9,14 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MimeKit;
 using MimeKit.Text;
+using OnlineMarket.WebAPI.Auth;
+using OnlineMarket.WebAPI.Contracts.Requests.Models;
+using OnlineMarket.WebAPI.Contracts.Responses;
+using OnlineMarket.WebAPI.Data;
+using OnlineMarket.WebAPI.Data.Models;
+using OnlineMarket.WebAPI.Options;
 
-namespace AdBoardsWebAPI.Extensions;
+namespace OnlineMarket.WebAPI.Extensions;
 
 public static class PeopleEndpoints
 {
@@ -90,7 +90,7 @@ public static class PeopleEndpoints
                     new Claim("id", person.Id.ToString()),
                     new Claim("email", person.Email),
                     new Claim("login", person.Login),
-                    new Claim("role", person.RoleId.ToString())
+                    new Claim("roleId", person.RoleId.ToString())
                 }, "jwt"),
                 Expires = DateTime.UtcNow.AddDays(7),
                 Issuer = jwtOptions.Value.Issuer,

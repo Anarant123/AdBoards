@@ -1,13 +1,13 @@
-﻿using AdBoardsDesktop.Models.db;
-using System;
+﻿using System;
 using System.Net.Http;
-using AdBoards.ApiClient.Contracts.Requests;
-using AdBoards.ApiClient.Extensions;
+using OnlineMarket.ApiClient.Contracts.Requests;
+using OnlineMarket.ApiClient.Extensions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop.Views
+namespace OnlineMarket.Desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для AdminAdPage.xaml

@@ -1,9 +1,9 @@
-﻿using AdBoards.ApiClient.Extensions;
-using AdBoardsDesktop.Models.db;
+﻿using OnlineMarket.ApiClient.Extensions;
 using System;
 using System.Windows;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop
+namespace OnlineMarket.Desktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

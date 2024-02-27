@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http;
 
-namespace AdBoards.ApiClient.Contracts.Requests;
+namespace OnlineMarket.ApiClient.Contracts.Requests;
 
 public class AddAdModel
 {

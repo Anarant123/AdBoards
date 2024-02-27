@@ -1,9 +1,9 @@
-﻿using AdBoards.ApiClient;
-using AdBoards.ApiClient.Contracts.Responses;
+﻿using OnlineMarket.ApiClient;
+using OnlineMarket.ApiClient.Contracts.Responses;
 using System;
 using System.Collections.Generic;
 
-namespace AdBoardsDesktop.Models.db;
+namespace OnlineMarket.Desktop.Models.db;
 
 public partial class Context 
 {

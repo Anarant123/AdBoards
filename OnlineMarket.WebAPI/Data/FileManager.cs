@@ -1,4 +1,4 @@
-namespace AdBoardsWebAPI.Data;
+namespace OnlineMarket.WebAPI.Data;
 
 public class FileManager
 {

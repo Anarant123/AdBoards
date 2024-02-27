@@ -1,4 +1,4 @@
-﻿namespace AdBoards.ApiClient.Contracts.Requests;
+﻿namespace OnlineMarket.ApiClient.Contracts.Requests;
 
 public class PersonReg
 {

@@ -1,9 +1,9 @@
 ﻿#nullable disable
 
-using AdBoardsWebAPI.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using OnlineMarket.WebAPI.Data.Models;
 
-namespace AdBoardsWebAPI.Data;
+namespace OnlineMarket.WebAPI.Data;
 
 public class OnlineMarketContext : DbContext
 {

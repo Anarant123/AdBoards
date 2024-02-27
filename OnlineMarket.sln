@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarket.ApiClient", "O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarket.Domain", "OnlineMarket.Domain\OnlineMarket.Domain.csproj", "{0360CD04-00D3-4558-84E2-EBCE4C1D288D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functional", "Functional\Functional.csproj", "{D2538805-DE95-4E92-A501-E2EF5EB34146}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarket.Functional", "OnlineMarket.Functional\OnlineMarket.Functional.csproj", "{D2538805-DE95-4E92-A501-E2EF5EB34146}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarket.WebAPI", "OnlineMarket.WebAPI\OnlineMarket.WebAPI.csproj", "{8DDFD535-BB9D-4850-B4DF-5AA02D976A4C}"
 EndProject

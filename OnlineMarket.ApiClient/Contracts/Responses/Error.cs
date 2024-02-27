@@ -1,4 +1,4 @@
-namespace AdBoards.ApiClient.Contracts.Responses;
+namespace OnlineMarket.ApiClient.Contracts.Responses;
 
 public class Error
 {

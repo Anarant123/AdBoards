@@ -1,6 +1,6 @@
 using System.Net.Http.Headers;
 
-namespace AdBoards.ApiClient;
+namespace OnlineMarket.ApiClient;
 
 public class OnlineMarketApiClient
 {

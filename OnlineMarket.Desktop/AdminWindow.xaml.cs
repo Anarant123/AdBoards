@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace AdBoardsDesktop
+namespace OnlineMarket.Desktop
 {
     /// <summary>
     /// Логика взаимодействия для AdminWindow.xaml

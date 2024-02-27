@@ -1,10 +1,10 @@
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using AdBoards.ApiClient.Contracts.Requests;
-using AdBoards.ApiClient.Contracts.Responses;
+using OnlineMarket.ApiClient.Contracts.Requests;
+using OnlineMarket.ApiClient.Contracts.Responses;
 
-namespace AdBoards.ApiClient.Extensions;
+namespace OnlineMarket.ApiClient.Extensions;
 
 public static class AdExtensions
 {
