@@ -1,12 +1,12 @@
-﻿<Window x:Class="OnlineMarket.Desktop.MainWindow"
+﻿<Window x:Class="AdBoardsDesktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         WindowStartupLocation="CenterScreen"
-        xmlns:local="clr-namespace:OnlineMarket.Desktop"
+        xmlns:local="clr-namespace:AdBoardsDesktop"
         mc:Ignorable="d"
-        Title="OnlineMarket" MinHeight="700" MinWidth="1200">
+        Title="AdBoards" MinHeight="600" MinWidth="1200">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
@@ -14,8 +14,7 @@
     </Window.Resources>
     
     <DockPanel LastChildFill="True">
-        <Grid DockPanel.Dock="Top"
-              Height="55">
+        <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -24,7 +23,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button x:Name="btnToSearch" 
-                    Grid.Column="0"
+                    Grid.Column="0" 
                     Click="btnToSearch_Click">
                 <StackPanel Margin="2">
                     <Image Width="25" Source="\Resources\drawable0\icon_loop.png" Stretch="Uniform"/>
