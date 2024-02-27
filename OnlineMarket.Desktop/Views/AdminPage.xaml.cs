@@ -1,5 +1,4 @@
-﻿using AdBoards.ApiClient.Extensions;
-using AdBoardsDesktop.Models.db;
+﻿using OnlineMarket.ApiClient.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -7,8 +6,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Controls;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop.Views
+namespace OnlineMarket.Desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для AdminPage.xaml

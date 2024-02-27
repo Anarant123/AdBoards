@@ -1,14 +1,14 @@
-﻿using AdBoards.ApiClient.Contracts.Requests;
-using AdBoards.ApiClient.Extensions;
-using AdBoardsDesktop.Models.db;
+﻿using OnlineMarket.ApiClient.Contracts.Requests;
+using OnlineMarket.ApiClient.Extensions;
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop.Views
+namespace OnlineMarket.Desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для RegistrationPage.xaml

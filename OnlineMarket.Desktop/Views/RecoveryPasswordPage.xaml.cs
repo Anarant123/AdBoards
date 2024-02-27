@@ -1,13 +1,13 @@
-﻿using AdBoardsDesktop.Models.db;
-using AdBoards.ApiClient.Contracts.Responses;
-using AdBoards.ApiClient.Extensions;
+﻿using OnlineMarket.ApiClient.Contracts.Responses;
+using OnlineMarket.ApiClient.Extensions;
 using System;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop.Views
+namespace OnlineMarket.Desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для RecoveryPasswordPage.xaml

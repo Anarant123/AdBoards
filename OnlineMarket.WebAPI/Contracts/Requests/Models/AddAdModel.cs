@@ -1,4 +1,4 @@
-namespace AdBoardsWebAPI.Contracts.Requests.Models;
+namespace OnlineMarket.WebAPI.Contracts.Requests.Models;
 
 public record AddAdModel
 (

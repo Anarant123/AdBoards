@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AdBoardsWebAPI.Data.Models;
+namespace OnlineMarket.WebAPI.Data.Models;
 
 public class Favorite
 {

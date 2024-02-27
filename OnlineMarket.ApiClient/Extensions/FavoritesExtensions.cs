@@ -1,4 +1,4 @@
-namespace AdBoards.ApiClient.Extensions;
+namespace OnlineMarket.ApiClient.Extensions;
 
 public static class FavoritesExtensions
 {

@@ -1,4 +1,4 @@
-namespace AdBoards.Domain.Enums;
+namespace OnlineMarket.Domain.Enums;
 
 public enum RoleType
 {

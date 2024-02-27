@@ -1,12 +1,12 @@
-﻿using AdBoards.ApiClient.Contracts.Responses;
-using AdBoards.ApiClient.Extensions;
-using AdBoardsDesktop.Models.db;
+﻿using OnlineMarket.ApiClient.Contracts.Responses;
+using OnlineMarket.ApiClient.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Windows.Controls;
+using OnlineMarket.Desktop.Models.db;
 
-namespace AdBoardsDesktop.Views
+namespace OnlineMarket.Desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для StatsPage.xaml

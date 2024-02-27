@@ -1,6 +1,6 @@
-using AdBoards.Domain.Auth;
+using OnlineMarket.Domain.Auth;
 
-namespace AdBoards.ApiClient.Contracts.Responses;
+namespace OnlineMarket.ApiClient.Contracts.Responses;
 
 public class AuthorizedModel
 {

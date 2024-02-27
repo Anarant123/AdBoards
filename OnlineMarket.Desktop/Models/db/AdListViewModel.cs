@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using AdBoards.ApiClient.Contracts.Responses;
+using OnlineMarket.ApiClient.Contracts.Responses;
 
-namespace AdBoardsDesktop.Models.db
+namespace OnlineMarket.Desktop.Models.db
 {
     public class AdListViewModel
     {
