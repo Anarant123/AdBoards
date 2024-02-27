@@ -8,7 +8,7 @@ namespace AdBoards.ApiClient.Extensions;
 
 public static class AdExtensions
 {
-    public static async Task<List<Ad>> GetAds(this AdBoardsApiClient apiClient)
+    public static async Task<List<Ad>> GetAds(this OnlineMarketApiClient apiClient)
     {
         using var response = await apiClient.HttpClient.GetAsync("Ads/GetAds");
         var ads = await response.Content.ReadFromJsonAsync<List<Ad>>();
@@ -16,7 +16,7 @@ public static class AdExtensions
         return ads!;
     }
 
-    public static async Task<List<Ad>> GetMyAds(this AdBoardsApiClient apiClient)
+    public static async Task<List<Ad>> GetMyAds(this OnlineMarketApiClient apiClient)
     {
         using var response = await apiClient.HttpClient.GetAsync("Ads/GetMyAds");
         var ads = await response.Content.ReadFromJsonAsync<List<Ad>>();
@@ -24,7 +24,7 @@ public static class AdExtensions
         return ads!;
     }
 
-    public static async Task<List<Ad>> GetFavoritesAds(this AdBoardsApiClient apiClient)
+    public static async Task<List<Ad>> GetFavoritesAds(this OnlineMarketApiClient apiClient)
     {
         using var response = await apiClient.HttpClient.GetAsync("Ads/GetFavoritesAds");
         var ads = await response.Content.ReadFromJsonAsync<List<Ad>>();
@@ -32,7 +32,7 @@ public static class AdExtensions
         return ads!;
     }
 
-    public static async Task<Ad?> GetAd(this AdBoardsApiClient apiClient, int id)
+    public static async Task<Ad?> GetAd(this OnlineMarketApiClient apiClient, int id)
     {
         using var response = await apiClient.HttpClient.GetAsync($"Ads/GetAd?id={id}");
 
@@ -41,7 +41,7 @@ public static class AdExtensions
         return null;
     }
 
-    public static async Task<Ad?> AddAd(this AdBoardsApiClient apiClient, AddAdModel model)
+    public static async Task<Ad?> AddAd(this OnlineMarketApiClient apiClient, AddAdModel model)
     {
         using var jsonContent = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8, "application/json");
         using var response = await apiClient.HttpClient.PostAsync("Ads/Addition", jsonContent);
@@ -51,14 +51,14 @@ public static class AdExtensions
         return null;
     }
 
-    public static async Task<bool> DeleteAd(this AdBoardsApiClient apiClient, int adId)
+    public static async Task<bool> DeleteAd(this OnlineMarketApiClient apiClient, int adId)
     {
         using var response = await apiClient.HttpClient.DeleteAsync($"Ads/Delete?id={adId}");
 
         return response.IsSuccessStatusCode;
     }
 
-    public static async Task<Ad?> AdUpdate(this AdBoardsApiClient api, AddAdModel ad)
+    public static async Task<Ad?> AdUpdate(this OnlineMarketApiClient api, AddAdModel ad)
     {
         using var jsonContent = new StringContent(JsonSerializer.Serialize(ad), Encoding.UTF8, "application/json");
         using var response = await api.HttpClient.PutAsync("Ads/Update", jsonContent);
@@ -74,7 +74,7 @@ public static class AdExtensions
         }
     }
 
-    public static async Task<Ad?> UpdateAdPhoto(this AdBoardsApiClient apiClient, AddAdModel model)
+    public static async Task<Ad?> UpdateAdPhoto(this OnlineMarketApiClient apiClient, AddAdModel model)
     {
         if (model.Photo is null) return null;
 
@@ -91,7 +91,7 @@ public static class AdExtensions
         return null;
     }
 
-    public static async Task<List<Ad>> UseFulter(this AdBoardsApiClient apiClient, int type, string? priceFrom,
+    public static async Task<List<Ad>> UseFulter(this OnlineMarketApiClient apiClient, int type, string? priceFrom,
         string? priceUpTo, string? city, int categoryId, bool rbBuy, bool rbSell)
     {
         var ads = new List<Ad>();

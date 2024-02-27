@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>AdBoards.WebAPI</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AdBoards.Domain\AdBoards.Domain.csproj" />
+      <ProjectReference Include="..\OnlineMarket.Domain\OnlineMarket.Domain.csproj" />
     </ItemGroup>
 
 </Project>

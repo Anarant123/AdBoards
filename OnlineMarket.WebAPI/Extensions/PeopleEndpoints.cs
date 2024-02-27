@@ -37,7 +37,7 @@ public static class PeopleEndpoints
         return null;
     }
 
-    private static async Task<Error?> ValidateEmail(string email, AdBoardsContext context)
+    private static async Task<Error?> ValidateEmail(string email, OnlineMarketContext context)
     {
         if (await context.People.AnyAsync(x => x.Email == email))
         {
@@ -55,25 +55,25 @@ public static class PeopleEndpoints
     {
         var group = app.MapGroup("People").WithTags("People");
 
-        group.MapGet("GetPeople", async (AdBoardsContext context) =>
+        group.MapGet("GetPeople", async (OnlineMarketContext context) =>
         {
             var people = await context.People.Include(x => x.Role).ToListAsync();
             return people.Count == 0 ? Results.NotFound() : Results.Ok(people);
         }).RequireAuthorization(Policies.Admin);
 
-        group.MapGet("GetMe", async (AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapGet("GetMe", async (OnlineMarketContext context, ClaimsPrincipal user) =>
         {
             var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
             return await context.People.Include(x => x.Role).FirstOrDefaultAsync(x => x.Id == id);
         });
 
-        group.MapGet("GetCountOfClient", async (AdBoardsContext context) =>
+        group.MapGet("GetCountOfClient", async (OnlineMarketContext context) =>
         {
             var count = await context.People.CountAsync();
             return count == 0 ? Results.NotFound() : Results.Ok(count);
         }).RequireAuthorization(Policies.Admin);
 
-        group.MapGet("Authorization", async (string login, string password, AdBoardsContext context,
+        group.MapGet("Authorization", async (string login, string password, OnlineMarketContext context,
             IOptions<JwtOptions> jwtOptions) =>
         {
             var person = await context.People
@@ -105,7 +105,7 @@ public static class PeopleEndpoints
             return Results.Ok(new { person, Token = stringToken });
         }).AllowAnonymous();
 
-        group.MapPost("Registration", async (RegisterModel model, AdBoardsContext context, FileManager fileManager) =>
+        group.MapPost("Registration", async (RegisterModel model, OnlineMarketContext context, FileManager fileManager) =>
         {
             var p = new Person
             {
@@ -154,7 +154,7 @@ public static class PeopleEndpoints
             return Results.Ok(p);
         }).AllowAnonymous();
 
-        group.MapPost("RecoveryPassword", async (AdBoardsContext dbContext, IOptions<SmtpOptions> smtpOptions,
+        group.MapPost("RecoveryPassword", async (OnlineMarketContext dbContext, IOptions<SmtpOptions> smtpOptions,
             string login) =>
         {
             var p = await dbContext.People.FirstOrDefaultAsync(x => x.Login == login);
@@ -189,7 +189,7 @@ public static class PeopleEndpoints
             }
         }).AllowAnonymous();
 
-        group.MapPut("Update", async (UpdatePersonModel model, AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapPut("Update", async (UpdatePersonModel model, OnlineMarketContext context, ClaimsPrincipal user) =>
         {
             var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
@@ -226,7 +226,7 @@ public static class PeopleEndpoints
             return Results.Ok(person);
         });
 
-        group.MapPut("Photo", async (IFormFile? photo, AdBoardsContext context, FileManager fileManager,
+        group.MapPut("Photo", async (IFormFile? photo, OnlineMarketContext context, FileManager fileManager,
             ClaimsPrincipal user) =>
         {
             var id = int.Parse(user.Claims.First(x => x.Type == "id").Value);
@@ -241,7 +241,7 @@ public static class PeopleEndpoints
             return Results.Ok(person);
         });
 
-        group.MapDelete("Delete", async (string login, AdBoardsContext context) =>
+        group.MapDelete("Delete", async (string login, OnlineMarketContext context) =>
         {
             var p = await context.People.FirstOrDefaultAsync(x => x.Login == login);
             if (p is null) return Results.NotFound();

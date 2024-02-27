@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdBoardsWebAPI.Data;
 
-public class AdBoardsContext : DbContext
+public class OnlineMarketContext : DbContext
 {
-    public AdBoardsContext()
+    public OnlineMarketContext()
     {
     }
 
-    public AdBoardsContext(DbContextOptions<AdBoardsContext> options)
+    public OnlineMarketContext(DbContextOptions<OnlineMarketContext> options)
         : base(options)
     {
     }

@@ -2,7 +2,7 @@ namespace AdBoards.ApiClient.Extensions;
 
 public static class FavoritesExtensions
 {
-    public static async Task<bool> AddToFavorites(this AdBoardsApiClient apiClient, int adId)
+    public static async Task<bool> AddToFavorites(this OnlineMarketApiClient apiClient, int adId)
     {
         using var response =
             await apiClient.HttpClient.PostAsync($"Favorites/Addition?adId={adId}", new StringContent(""));
@@ -12,7 +12,7 @@ public static class FavoritesExtensions
         return false;
     }
 
-    public static async Task<bool> DeleteFromFavorites(this AdBoardsApiClient apiClient, int adId)
+    public static async Task<bool> DeleteFromFavorites(this OnlineMarketApiClient apiClient, int adId)
     {
         using var response = await apiClient.HttpClient.DeleteAsync($"Favorites/Delete?adId={adId}");
 

@@ -2,7 +2,7 @@ namespace AdBoards.ApiClient.Extensions;
 
 public static class ComplaintExtensions
 {
-    public static async Task<bool> AddToComplaints(this AdBoardsApiClient apiClient, int adId)
+    public static async Task<bool> AddToComplaints(this OnlineMarketApiClient apiClient, int adId)
     {
         using var response =
             await apiClient.HttpClient.PostAsync($"Complaint/Addition?adId={adId}", new StringContent(""));
@@ -12,7 +12,7 @@ public static class ComplaintExtensions
         return false;
     }
 
-    public static async Task<bool> DeleteFromComplaints(this AdBoardsApiClient apiClient, int adId)
+    public static async Task<bool> DeleteFromComplaints(this OnlineMarketApiClient apiClient, int adId)
     {
         using var response = await apiClient.HttpClient.DeleteAsync($"Complaint/Delete?adId={adId}");
 

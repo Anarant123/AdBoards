@@ -2,13 +2,13 @@ using System.Net.Http.Headers;
 
 namespace AdBoards.ApiClient;
 
-public class AdBoardsApiClient
+public class OnlineMarketApiClient
 {
     internal readonly HttpClient HttpClient;
 
     private string? _jwt;
 
-    public AdBoardsApiClient(string apiBasePath)
+    public OnlineMarketApiClient(string apiBasePath)
     {
         HttpClient = new HttpClient
         {

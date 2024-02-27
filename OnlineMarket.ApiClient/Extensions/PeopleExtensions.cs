@@ -9,7 +9,7 @@ namespace AdBoards.ApiClient.Extensions;
 
 public static class PeopleExtensions
 {
-    public static async Task<AuthorizedModel?> Authorize(this AdBoardsApiClient api, string login, string password)
+    public static async Task<AuthorizedModel?> Authorize(this OnlineMarketApiClient api, string login, string password)
     {
         using var response = await api.HttpClient.GetAsync($"People/Authorization?login={login}&password={password}");
 
@@ -18,7 +18,7 @@ public static class PeopleExtensions
             : null;
     }
 
-    public static async Task<IEnumerable<Error>> Registr(this AdBoardsApiClient api, PersonReg person)
+    public static async Task<IEnumerable<Error>> Registr(this OnlineMarketApiClient api, PersonReg person)
     {
         using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
         using var response = await api.HttpClient.PostAsync("People/Registration", jsonContent);
@@ -28,19 +28,19 @@ public static class PeopleExtensions
             : (await response.Content.ReadFromJsonAsync<List<Error>>())!;
     }
 
-    public static async Task Recover(this AdBoardsApiClient api, string login)
+    public static async Task Recover(this OnlineMarketApiClient api, string login)
     {
         using var response = await api.HttpClient.PostAsync($"People/RecoveryPassword?login={login}",
             new StringContent(""));
     }
 
-    public static async Task<Person?> GetMe(this AdBoardsApiClient api)
+    public static async Task<Person?> GetMe(this OnlineMarketApiClient api)
     {
         using var response = await api.HttpClient.GetAsync("People/GetMe");
         return await response.Content.ReadFromJsonAsync<Person>();
     }
 
-    public static async Task<Result<Person, IEnumerable<Error>>> PersonUpdate(this AdBoardsApiClient api,
+    public static async Task<Result<Person, IEnumerable<Error>>> PersonUpdate(this OnlineMarketApiClient api,
         EditPersonModel person)
     {
         using var jsonContent = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
@@ -51,7 +51,7 @@ public static class PeopleExtensions
             : new Error<IEnumerable<Error>>((await response.Content.ReadFromJsonAsync<List<Error>>())!);
     }
 
-    public static async Task<Person?> UpdatePersonPhoto(this AdBoardsApiClient api, EditPersonModel model)
+    public static async Task<Person?> UpdatePersonPhoto(this OnlineMarketApiClient api, EditPersonModel model)
     {
         if (model.Photo is null) return null;
 
@@ -68,7 +68,7 @@ public static class PeopleExtensions
         return null;
     }
 
-    public static async Task<int> GetCountOfClient(this AdBoardsApiClient api)
+    public static async Task<int> GetCountOfClient(this OnlineMarketApiClient api)
     {
         using var response = await api.HttpClient.GetAsync("People/GetCountOfClient");
 
@@ -76,13 +76,13 @@ public static class PeopleExtensions
         return count;
     }
 
-    public static async Task<List<Person>?> GetPeople(this AdBoardsApiClient api)
+    public static async Task<List<Person>?> GetPeople(this OnlineMarketApiClient api)
     {
         using var response = await api.HttpClient.GetAsync("People/GetPeople");
         return await response.Content.ReadFromJsonAsync<List<Person>>();
     }
 
-    public static async Task<bool> DeletePeople(this AdBoardsApiClient api, string login)
+    public static async Task<bool> DeletePeople(this OnlineMarketApiClient api, string login)
     {
         using var response = await api.HttpClient.DeleteAsync($"People/Delete?login={login}");
         return response.IsSuccessStatusCode;

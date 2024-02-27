@@ -12,7 +12,7 @@ public static class ComplaintEndpoints
     {
         var group = app.MapGroup("Complaint/").WithTags("Complaint");
 
-        group.MapPost("Addition", async (int adId, AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapPost("Addition", async (int adId, OnlineMarketContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
 
@@ -31,7 +31,7 @@ public static class ComplaintEndpoints
             return Results.Ok();
         });
 
-        group.MapDelete("Delete", async (int adId, AdBoardsContext context) =>
+        group.MapDelete("Delete", async (int adId, OnlineMarketContext context) =>
         {
             var complaints = context.Complaints.Where(x => x.AdId == adId);
 

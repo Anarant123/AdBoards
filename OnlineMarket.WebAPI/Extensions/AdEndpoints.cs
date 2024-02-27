@@ -14,7 +14,7 @@ public static class AdEndpoints
     {
         var group = app.MapGroup("Ads/").WithTags("Ads");
 
-        group.MapGet("GetAd", async (int id, AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapGet("GetAd", async (int id, OnlineMarketContext context, ClaimsPrincipal user) =>
         {
             var ad = await context.Ads
                 .Include(x => x.Complaints)
@@ -36,7 +36,7 @@ public static class AdEndpoints
             return Results.Ok(dto);
         }).AllowAnonymous();
 
-        group.MapGet("GetAds", async (AdBoardsContext context) =>
+        group.MapGet("GetAds", async (OnlineMarketContext context) =>
         {
             var ads = await context.Ads
                 .Include(x => x.Complaints)
@@ -47,7 +47,7 @@ public static class AdEndpoints
             return Results.Ok(ads);
         }).AllowAnonymous();
 
-        group.MapGet("GetMyAds", async (AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapGet("GetMyAds", async (OnlineMarketContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
             var ads = await context.Ads
@@ -61,7 +61,7 @@ public static class AdEndpoints
             return Results.Ok(ads);
         });
 
-        group.MapGet("GetFavoritesAds", async (AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapGet("GetFavoritesAds", async (OnlineMarketContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
             var ads = await context.Favorites
@@ -76,7 +76,7 @@ public static class AdEndpoints
             return Results.Ok(ads);
         });
 
-        group.MapPost("Addition", async (AddAdModel model, AdBoardsContext context, ClaimsPrincipal user,
+        group.MapPost("Addition", async (AddAdModel model, OnlineMarketContext context, ClaimsPrincipal user,
             FileManager fileManager) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
@@ -108,7 +108,7 @@ public static class AdEndpoints
             return Results.Ok(a);
         });
 
-        group.MapPut("{id:int}/Photo", async (int id, IFormFile? photo, AdBoardsContext context,
+        group.MapPut("{id:int}/Photo", async (int id, IFormFile? photo, OnlineMarketContext context,
             FileManager fileManager, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
@@ -129,7 +129,7 @@ public static class AdEndpoints
             return Results.Ok(ad);
         });
 
-        group.MapPut("Update", async (UpdateAdModel model, AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapPut("Update", async (UpdateAdModel model, OnlineMarketContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
             var ad = await context.Ads
@@ -162,7 +162,7 @@ public static class AdEndpoints
             return Results.Ok(ad);
         });
 
-        group.MapDelete("Delete", async (int id, AdBoardsContext context, ClaimsPrincipal user) =>
+        group.MapDelete("Delete", async (int id, OnlineMarketContext context, ClaimsPrincipal user) =>
         {
             var userId = int.Parse(user.Claims.First(x => x.Type == "id").Value);
             var res = Enum.TryParse(user.Claims.First(x => x.Type == "roleId").Value, out RoleType userRoleId);

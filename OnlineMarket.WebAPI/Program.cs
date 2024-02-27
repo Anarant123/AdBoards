@@ -84,7 +84,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddDbContext<AdBoardsContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStrings:AdBoards"]));
+builder.Services.AddDbContext<OnlineMarketContext>(o => o.UseNpgsql(builder.Configuration["ConnectionStrings:AdBoards"]));
 builder.Services.AddDirectoryBrowser();
 
 // Custom services.
@@ -131,7 +131,7 @@ api.MapFavoritesEndpoints();
 api.MapPeopleEndpoints();
 
 using var scope = app.Services.CreateScope();
-using var context = scope.ServiceProvider.GetRequiredService<AdBoardsContext>();
+using var context = scope.ServiceProvider.GetRequiredService<OnlineMarketContext>();
 await context.Database.EnsureCreatedAsync();
 
 // Starting the app.
